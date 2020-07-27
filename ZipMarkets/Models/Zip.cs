@@ -5,7 +5,14 @@ using System.Threading.Tasks;
 
 namespace ZipMarkets.Models
 {
-    public class ZipCode
+    public class Zip
     {
+        public int Id { get; set; }
+        public int ZipCode { get; set; }
+        public int StateId { get; set; }
+        public State State { get; set; }
+        public string City { get; set; }
+        public string County { get; set; }
+        public decimal ForecastYoYPctChange { get; set; }
     }
 }
