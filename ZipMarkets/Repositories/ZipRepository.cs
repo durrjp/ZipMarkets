@@ -21,6 +21,8 @@ namespace ZipMarkets.Repositories
         {
             return _context.AllZips
                 .Include(z => z.State)
+                .Include(z => z.ZipHPIs)
+                .Include(z => z.ZipZVHIs)
                 .ToList();
         }
     }
