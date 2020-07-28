@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import * as firebase from "firebase/app";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const firebaseConfig = {
