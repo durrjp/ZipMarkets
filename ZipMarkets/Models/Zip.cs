@@ -14,5 +14,7 @@ namespace ZipMarkets.Models
         public string City { get; set; }
         public string County { get; set; }
         public decimal ForecastYoYPctChange { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
     }
 }
