@@ -1,18 +1,36 @@
 import React, {useState, useRef, useContext, useEffect} from "react"
-import ReactMapGL, {Marker, Popup, FlyToInterpolator} from "react-map-gl"
+import MapGL, { Marker } from '@urbica/react-map-gl';
+import Cluster from '@urbica/react-map-gl-cluster';
 import { ZipContext } from "../../providers/ZipProvider";
-import useSupercluster from "use-supercluster";
+import 'mapbox-gl/dist/mapbox-gl.css';
+
+const markerStyle = {
+    padding: '3px',
+    color: '#fff',
+    background: '#1978c8',
+    borderRadius: '10px',
+    textAlign: 'center'
+  };
+
+const clusterStyle = {
+    background: '#f28a25',
+    textAlign: 'center',
+    width: '20px',
+    height: '20px',
+    borderRadius: '20px'
+}
 
 export default function Explore() {
     const [viewport, setViewPort] = useState({
         latitude: 36.007373,
         longitude: -86.79121,
-        width: "100vw",
-        height: "100vh",
-        zoom: 12
+        width: "100",
+        height: "100",
+        zoom: 20
 
     })
     const mapRef= useRef();
+    const clusterRef = useRef();
     const {allZips, getAllZips} = useContext(ZipContext)
     // const [selectedZip, setSelectedZip] = useState(null);
 
@@ -21,127 +39,50 @@ export default function Explore() {
         // eslint-disable-next-line 
     },[])
 
-  
+    const ClusterMarker = ({ longitude, latitude, pointCount }) => (
+        <Marker longitude={longitude} latitude={latitude}>
+          <div style={{ ...clusterStyle }}>{pointCount}</div>
+        </Marker>
+      );
 
-    const points = allZips.map((zip => ({
-        type: "Feature",
-        properties: {cluster: true, zipId: zip.Id},
-        geometry: {
-            type: "Point",
-            coordinates: [
-                zip.Longitude,
-                zip.Latitude
-            ]
-        }
-    })))
-
-    const bounds = mapRef.current
-        ? mapRef.current
-            .getMap()
-            .getBounds()
-            .toArray()
-            .flat()
-        : null;
+    if(allZips.length === 0) {
+        return null
+    }
     
-    const { clusters, supercluster } = useSupercluster({
-        points,
-        bounds,
-        zoom: viewport.zoom,
-        options: { radius: 75, maxZoom: 20 }
-    },[allZips]);
+    
 
-    console.log(clusters)
 
     return (
-        <div>
-            <ReactMapGL
-                {...viewport}
-                maxZoom = {12}
-                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                mapStyle="mapbox://styles/durrjp/ckd3q2q5h0b3k1iqrd06bgyw4?optimize=true"
-                onViewportChange={newViewport => {
-                    setViewPort({...newViewport})
-                }}
-                ref={mapRef}
+        <MapGL
+            style={{width: '100vw', height: '100vh'}}
+            {...viewport}
+            maxZoom = {12}
+            accessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+            mapStyle="mapbox://styles/durrjp/ckd3q2q5h0b3k1iqrd06bgyw4?optimize=true"
+            onViewportChange={newViewport => {
+                setViewPort({...newViewport})
+            }}
+            ref={mapRef}
+        >
+            <Cluster
+                ref={clusterRef}
+                radius={200}
+                extent={512}
+                nodeSize={64}
+                component= {ClusterMarker}
+                
             >
-
-                {clusters.map(cluster => {
-                const [longitude, latitude] = cluster.geometry.coordinates;
-                const {
-                    cluster: isCluster,
-                    point_count: pointCount
-                } = cluster.properties;
-
-                if (isCluster) {
-                    return (
-                        <Marker
-                            key={`cluster-${cluster.id}`}
-                            latitude={latitude}
-                            longitude={longitude}
-                        >
-                            <div
-                                style={{
-                                    width: `${10 + (pointCount / allZips.length) * 20}px`,
-                                    height: `${10 + (pointCount / allZips.length) * 20}px`
-                                }}
-                                onClick={() => {
-                                    const expansionZoom = Math.min(
-                                    supercluster.getClusterExpansionZoom(cluster.id),
-                                    20
-                                    );
-
-                                    setViewPort({
-                                        ...viewport,
-                                        latitude,
-                                        longitude,
-                                        zoom: expansionZoom,
-                                        transitionInterpolator: new FlyToInterpolator({
-                                            speed: 4
-                                    }),
-                                    transitionDuration: "auto"
-                                    });
-                                }}
-                            >
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="8" cy="8" r="8" fill="#E73333"/>
-                                </svg>  
-                            </div>
-                        </Marker>
-                    );
-                }
-                return (
+                {allZips.map(point => (
                     <Marker
-                        key={cluster.id}
-                        latitude={latitude}
-                        longitude={longitude}
+                        key={point.id}
+                        longitude={point.longitude}
+                        latitude={point.latitude}
                     >
-                        <div onClick={e => {
-                            e.preventDefault();
-                            // setSelectedZip(zip);
-                            }} 
-                        >
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="8" cy="8" r="8" fill="#E73333"/>
-                            </svg>
-                        </div>
+                        <div style={markerStyle}>{point.zipCode}</div>
                     </Marker>
-                )
-                /* {selectedZip ? (
-                    <Popup
-                        latitude={selectedZip.latitude}
-                        longitude={selectedZip.longitude}
-                        onClose={() => {
-                        setSelectedZip(null);
-                        }}
-                    >
-                        <div>
-                        <h2>{selectedZip.zipCode}</h2>
-                        <p>{selectedZip.state.stateName}</p>
-                        </div>
-                    </Popup>
-                ) : null} */
-            })}
-            </ReactMapGL>
-        </div>
+                ))}
+
+            </Cluster>
+        </MapGL>
     )
 }
