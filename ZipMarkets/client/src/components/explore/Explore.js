@@ -1,5 +1,5 @@
 import React, {useState, useRef, useContext, useEffect} from "react"
-import MapGL, { Marker } from '@urbica/react-map-gl';
+import MapGL, { Marker, Popup } from '@urbica/react-map-gl';
 import Cluster from '@urbica/react-map-gl-cluster';
 import { ZipContext } from "../../providers/ZipProvider";
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -26,12 +26,13 @@ export default function Explore() {
         longitude: -86.79121,
         width: "100",
         height: "100",
-        zoom: 20
+        zoom: 12
 
     })
     const mapRef= useRef();
     const clusterRef = useRef();
     const {allZips, getAllZips} = useContext(ZipContext)
+    const [selectedMarker, setSelectedMarker] = useState(null)
     // const [selectedZip, setSelectedZip] = useState(null);
 
     useEffect(() => {
@@ -49,14 +50,30 @@ export default function Explore() {
         return null
     }
     
-    
+    const renderPopop = () => (
+        selectedMarker ? (
+            <Popup
+                tipSize={10}
+                anchor="bottom"
+                latitude={selectedMarker.latitude}
+                longitude={selectedMarker.longitude}
+                closeOnClick={false}
+                onClose={() => setSelectedMarker(null)}
+            >
+                <h2>{selectedMarker.zipCode}</h2>
+                <p>{selectedMarker.city}, {selectedMarker.state.stateName}</p>
+                <p>{selectedMarker.county}</p>
+                <button>Details</button>
+            </Popup>
+        ) : null
+    )
 
 
     return (
         <MapGL
             style={{width: '100vw', height: '100vh'}}
             {...viewport}
-            maxZoom = {12}
+            maxZoom = {15}
             accessToken={process.env.REACT_APP_MAPBOX_TOKEN}
             mapStyle="mapbox://styles/durrjp/ckd3q2q5h0b3k1iqrd06bgyw4?optimize=true"
             onViewportChange={newViewport => {
@@ -66,7 +83,7 @@ export default function Explore() {
         >
             <Cluster
                 ref={clusterRef}
-                radius={200}
+                radius={100}
                 extent={512}
                 nodeSize={64}
                 component= {ClusterMarker}
@@ -78,11 +95,19 @@ export default function Explore() {
                         longitude={point.longitude}
                         latitude={point.latitude}
                     >
-                        <div style={markerStyle}>{point.zipCode}</div>
+                        <button
+                            style={markerStyle}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                setSelectedMarker(point)
+                            }}  
+                        >
+                            {point.zipCode}
+                        </button>
                     </Marker>
                 ))}
-
             </Cluster>
+                {renderPopop()}
         </MapGL>
     )
 }
