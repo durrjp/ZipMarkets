@@ -18,5 +18,12 @@ namespace ZipMarkets.Controllers
         {
             _zipRepository = new ZipRepository(context);
         }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_zipRepository.GetAll());
+        }
+
     }
 }

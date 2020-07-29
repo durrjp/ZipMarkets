@@ -20,7 +20,5 @@ namespace ZipMarkets.Data
         public DbSet<UserType> UserType { get; set; }
         public DbSet<User> Users { get; set; }
 
-
-
     }
 }
