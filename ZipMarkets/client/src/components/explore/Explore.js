@@ -3,12 +3,14 @@ import MapGL, { Marker, Popup } from '@urbica/react-map-gl';
 import Cluster from '@urbica/react-map-gl-cluster';
 import { ZipContext } from "../../providers/ZipProvider";
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { Button } from "reactstrap";
+import { useHistory } from "react-router-dom";
 
 const markerStyle = {
     padding: '3px',
     color: '#000000',
     background: '#98E6FF',
-    borderRadius: '10px',
+    borderRadius: '8px',
     textAlign: 'center'
   };
 
@@ -23,14 +25,15 @@ export default function Explore() {
     })
     const mapRef= useRef();
     const clusterRef = useRef();
-    const {allZips, getAllZips} = useContext(ZipContext)
-    const [selectedMarker, setSelectedMarker] = useState(null)
-    // const [selectedZip, setSelectedZip] = useState(null);
+    const history = useHistory();
+    const {allZips, getAllZips, getZipById} = useContext(ZipContext)
+    const [chosenZip, setChosenZip] = useState(null)
 
     useEffect(() => {
         getAllZips()
         // eslint-disable-next-line 
     },[])
+
 
     const ClusterMarker = ({ longitude, latitude, pointCount }) => (
         <Marker longitude={longitude} latitude={latitude}>
@@ -38,8 +41,8 @@ export default function Explore() {
                 background: '#f28a25',
                 textAlign: 'center',
                 padding: 'auto',
-                width: `${20 + (pointCount/1000) *25}px`,
-                height: `${20 + (pointCount/1000) *25}px`,
+                width: `${20 + (pointCount/1000) *20}px`,
+                height: `${20 + (pointCount/1000) *20}px`,
                 borderRadius: '100px'
             }}
           >
@@ -48,24 +51,31 @@ export default function Explore() {
         </Marker>
       );
 
+    const handleClick = () => {
+        history.push(`/zip/${chosenZip.id}`);
+    }
+
     if(allZips.length === 0) {
         return null
     }
     
     const renderPopop = () => (
-        selectedMarker ? (
+        chosenZip ? (
             <Popup
                 tipSize={10}
                 anchor="bottom"
-                latitude={selectedMarker.latitude}
-                longitude={selectedMarker.longitude}
+                latitude={chosenZip.latitude}
+                longitude={chosenZip.longitude}
                 closeOnClick={false}
-                onClose={() => setSelectedMarker(null)}
+                onClose={() => {
+                    setChosenZip(null)}
+                }
             >
-                <h2>{selectedMarker.zipCode}</h2>
-                <p>{selectedMarker.city}, {selectedMarker.state.stateName}</p>
-                <p>{selectedMarker.county}</p>
-                <button>Details</button>
+                <h2>{chosenZip.zipCode}</h2>
+                <p>{chosenZip.city}, {chosenZip.state.stateName}</p>
+                <p>{chosenZip.county}</p>
+                <p>ZVHI: {chosenZip.zvhiList.slice(-1)[0].value}</p>
+                <Button onClick={handleClick}>Details</Button>
             </Popup>
         ) : null
     )
@@ -97,15 +107,15 @@ export default function Explore() {
                         longitude={point.longitude}
                         latitude={point.latitude}
                     >
-                        <button
+                        <Button
                             style={markerStyle}
                             onClick={(e) => {
                                 e.preventDefault()
-                                setSelectedMarker(point)
+                                getZipById(point.id).then(setChosenZip)
                             }}  
                         >
                             {point.zipCode}
-                        </button>
+                        </Button>
                     </Marker>
                 ))}
             </Cluster>

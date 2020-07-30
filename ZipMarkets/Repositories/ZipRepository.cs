@@ -20,9 +20,19 @@ namespace ZipMarkets.Repositories
         public List<Zip> GetAll()
         {
             return _context.AllZips
-                .Include(z => z.State)
-                .Where(z => z.Latitude != null && z.Longitude != null)
-                .ToList();
+                            .Include(z => z.State)
+                            .Where(z => z.Latitude != null && z.Longitude != null)
+                            .ToList();
+        }
+
+        public Zip GetById(int id)
+        {
+            return _context.AllZips
+                            .Include(z => z.State)
+                            .Include(z => z.HPIList)
+                            .Include(z => z.ZVHIList)
+                            .Where(z => z.Id == id)
+                            .FirstOrDefault();
         }
     }
 }

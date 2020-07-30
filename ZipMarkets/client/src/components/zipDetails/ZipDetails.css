@@ -1,0 +1,10 @@
+.graphs-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.oneGraph {
+    width: 45%;
+    height: 60%;
+    margin: 1em
+}
