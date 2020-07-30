@@ -16,7 +16,7 @@ namespace ZipMarkets.Models
         public decimal ForecastYoYPctChange { get; set; }
         public decimal? Latitude { get; set; }
         public decimal? Longitude { get; set; }
-        /*public List<HPIClass> ZipHPIs { get; set; }
-        public List<ZVHIClass> ZipZVHIs { get; set; }*/
+        public List<HPIClass> HPIList { get; set; }
+        public List<ZVHIClass> ZVHIList { get; set; }
     }
 }

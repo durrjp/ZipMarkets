@@ -9,8 +9,8 @@ namespace ZipMarkets.Models
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public decimal Value { get; set; }
+        public int Value { get; set; }
         public int ZipCodeId { get; set; }
-        public Zip Zip { get; set; }
+        public Zip ZipCode { get; set; }
     }
 }

@@ -11,6 +11,6 @@ namespace ZipMarkets.Models
         public int Year { get; set; }
         public decimal HPI { get; set; }
         public int ZipCodeId { get; set; }
-        public Zip Zip { get; set; }
+        public Zip ZipCode { get; set; }
     }
 }

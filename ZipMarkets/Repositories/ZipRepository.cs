@@ -21,8 +21,6 @@ namespace ZipMarkets.Repositories
         {
             return _context.AllZips
                 .Include(z => z.State)
-                /*.Include(z => z.ZipHPIs)
-                .Include(z => z.ZipZVHIs)*/
                 .Where(z => z.Latitude != null && z.Longitude != null)
                 .ToList();
         }

@@ -11,6 +11,6 @@ namespace ZipMarkets.Models
         public int UserId { get; set; }
         public User User { get; set; }
         public int ZipCodeId { get; set; }
-        public Zip Zip { get; set; }
+        public Zip ZipCode { get; set; }
     }
 }

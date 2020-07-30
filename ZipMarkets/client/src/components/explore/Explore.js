@@ -6,19 +6,11 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 const markerStyle = {
     padding: '3px',
-    color: '#fff',
-    background: '#1978c8',
+    color: '#000000',
+    background: '#98E6FF',
     borderRadius: '10px',
     textAlign: 'center'
   };
-
-const clusterStyle = {
-    background: '#f28a25',
-    textAlign: 'center',
-    width: '20px',
-    height: '20px',
-    borderRadius: '20px'
-}
 
 export default function Explore() {
     const [viewport, setViewPort] = useState({
@@ -42,7 +34,17 @@ export default function Explore() {
 
     const ClusterMarker = ({ longitude, latitude, pointCount }) => (
         <Marker longitude={longitude} latitude={latitude}>
-          <div style={{ ...clusterStyle }}>{pointCount}</div>
+          <div style={{
+                background: '#f28a25',
+                textAlign: 'center',
+                padding: 'auto',
+                width: `${20 + (pointCount/1000) *25}px`,
+                height: `${20 + (pointCount/1000) *25}px`,
+                borderRadius: '100px'
+            }}
+          >
+              {pointCount}
+          </div>
         </Marker>
       );
 
@@ -75,7 +77,7 @@ export default function Explore() {
             {...viewport}
             maxZoom = {15}
             accessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-            mapStyle="mapbox://styles/durrjp/ckd3q2q5h0b3k1iqrd06bgyw4?optimize=true"
+            mapStyle="mapbox://styles/durrjp/ckd6b1pjv02ad1iqra64vul75?optimize=true"
             onViewportChange={newViewport => {
                 setViewPort({...newViewport})
             }}
