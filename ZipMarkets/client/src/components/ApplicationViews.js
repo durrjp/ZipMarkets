@@ -5,6 +5,7 @@ import { UserContext } from "../providers/UserProvider";
 import Explore from "./explore/Explore";
 import ZipDetails from "./zipDetails/ZipDetails";
 import Dashboard from "./dashboard/Dashboard";
+import Register from "./auth/Register";
 
 export default function ApplicationViews() {
     const { isLoggedIn, isAdmin } = useContext(UserContext);
@@ -28,7 +29,7 @@ export default function ApplicationViews() {
                 </Route>
 
                 <Route path="/register">
-                    {/* <Register/> */}
+                    <Register />
                 </Route>
             </Switch>
         </main>

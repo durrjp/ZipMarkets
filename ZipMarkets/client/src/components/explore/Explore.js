@@ -5,6 +5,7 @@ import { ZipContext } from "../../providers/ZipProvider";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Button } from "reactstrap";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../../providers/UserProvider";
 
 const markerStyle = {
     padding: '3px',
@@ -15,14 +16,17 @@ const markerStyle = {
   };
 
 export default function Explore() {
+    const [currentUser, setCurrentUser] = useState({})
+    const currentUserSesh = JSON.parse(sessionStorage.getItem("user"));
     const [viewport, setViewPort] = useState({
-        latitude: 36.007373,
-        longitude: -86.79121,
+        latitude: 0,
+        longitude: 0,
         width: "100",
         height: "100",
         zoom: 12
 
     })
+    const {getUserById} = useContext(UserContext)
     const mapRef= useRef();
     const clusterRef = useRef();
     const history = useHistory();
@@ -33,6 +37,21 @@ export default function Explore() {
         getAllZips()
         // eslint-disable-next-line 
     },[])
+
+    useEffect(() => {
+        getUserById(currentUserSesh.id).then(setCurrentUser)
+        // eslint-disable-next-line
+    },[])
+    debugger
+    useEffect(() => {
+        setViewPort({
+            latitude: currentUser.homeZip.latitude,
+            longitude: currentUser.homeZip.longitude,
+            width: "100",
+            height: "100",
+            zoom: 12
+        })
+    },[currentUser])
 
 
     const ClusterMarker = ({ longitude, latitude, pointCount }) => (

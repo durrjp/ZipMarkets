@@ -11,6 +11,7 @@
     "@urbica/react-map-gl-cluster": "^0.2.0",
     "bootstrap": "^4.5.0",
     "firebase": "^7.17.1",
+    "framework7-react": "^5.7.10",
     "mdbreact": "^4.27.0",
     "react": "^16.13.1",
     "react-chartjs-2": "^2.9.0",

@@ -7,6 +7,7 @@ import Header from './components/header/Header';
 import ZipProvider from './providers/ZipProvider';
 import PinnedMarketProvider from './providers/PinnedMarketProvider';
 
+
 function App() {
   return (
     <Router>

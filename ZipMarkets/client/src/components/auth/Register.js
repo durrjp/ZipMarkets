@@ -1,35 +1,39 @@
 import React, { useState, useContext } from "react";
 import { Button, Form, FormGroup, Label, Input, Card, CardBody } from "reactstrap";
 import { useHistory } from "react-router-dom";
-import { UserProfileContext } from "../providers/UserProfileProvider";
+import { UserContext } from "../../providers/UserProvider";
 
 export default function Register() {
   const history = useHistory();
-  const { register } = useContext(UserProfileContext);
+  const { register } = useContext(UserContext);
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [displayName, setDisplayName] = useState();
   const [email, setEmail] = useState();
-  const [imageLocation, setImageLocation] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+  const [homeZip, setHomeZip] = useState();
+  const [minHomePrice, setHomePriceMin] = useState();
+  const [maxHomePrice, setHomePriceMax] = useState();
+  
 
   const registerClick = (e) => {
     e.preventDefault();
     if (password && password !== confirmPassword) {
-      alert("Passwords don't match. Do better.");
+      alert("Passwords don't match.");
     } else {
       const userProfile = {
         firstName,
         lastName,
         displayName,
-        imageLocation,
         email,
+        homeZip,
+        minHomePrice,
+        maxHomePrice
       };
       register(userProfile, password).then(() => history.push("/"));
     }
   };
-
   return (
     <div className="container pt-4">
       <div className="row justify-content-center">
@@ -70,11 +74,27 @@ export default function Register() {
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label htmlFor="imageLocation">Profile Image URL</Label>
+                  <Label for="homezip">Home Zip Code</Label>
                   <Input
-                    id="imageLocation"
-                    type="text"
-                    onChange={(e) => setImageLocation(e.target.value)}
+                    id="homezip"
+                    type="number"
+                    onChange={(e) => setHomeZip(e.target.value)}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="minHomePrice">Home Price Interest (minimum)</Label>
+                  <Input
+                    id="minHomePrice"
+                    type="number"
+                    onChange={(e) => setHomePriceMin(e.target.value)}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="maxHomePrice">Home Price Interest (maximum)</Label>
+                  <Input
+                    id="maxHomePrice"
+                    type="number"
+                    onChange={(e) => setHomePriceMax(e.target.value)}
                   />
                 </FormGroup>
                 <FormGroup>

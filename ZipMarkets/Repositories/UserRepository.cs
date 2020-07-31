@@ -23,6 +23,7 @@ namespace ZipMarkets.Repositories
                        .Include(up => up.UserType)
                        .Include(up => up.UserPinnedMarkets)
                        .ThenInclude(zip => zip.ZipCode)
+                       .Include(up => up.HomeZip)
                        .FirstOrDefault(up => up.FirebaseUserId == firebaseUserId);
         }
 
@@ -40,6 +41,7 @@ namespace ZipMarkets.Repositories
                        .Include(up => up.UserType)
                        .Include(up => up.UserPinnedMarkets)
                        .ThenInclude(zip => zip.ZipCode)
+                       .Include(up => up.HomeZip)
                        .FirstOrDefault(up => up.Id == id);
         }
 

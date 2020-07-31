@@ -13,7 +13,8 @@ namespace ZipMarkets.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public int HomeZip { get; set; }
+        public int HomeZipId { get; set; }
+        public Zip HomeZip  { get; set; }
         public DateTime CreateDateTime { get; set; }
         public int UserTypeId { get; set; }
         public UserType UserType { get; set; }
