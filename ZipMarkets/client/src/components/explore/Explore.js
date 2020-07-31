@@ -16,42 +16,42 @@ const markerStyle = {
   };
 
 export default function Explore() {
-    const [currentUser, setCurrentUser] = useState({})
+    const [currentUser, setCurrentUser] = useState()
     const currentUserSesh = JSON.parse(sessionStorage.getItem("user"));
-    const [viewport, setViewPort] = useState({
-        latitude: 0,
-        longitude: 0,
-        width: "100",
-        height: "100",
-        zoom: 12
-
-    })
-    const {getUserById} = useContext(UserContext)
+    const {getUser} = useContext(UserContext)
     const mapRef= useRef();
     const clusterRef = useRef();
     const history = useHistory();
     const {allZips, getAllZips, getZipById} = useContext(ZipContext)
     const [chosenZip, setChosenZip] = useState(null)
-
+    
     useEffect(() => {
         getAllZips()
         // eslint-disable-next-line 
     },[])
-
+    
     useEffect(() => {
-        getUserById(currentUserSesh.id).then(setCurrentUser)
+        getUser(currentUserSesh.id).then((cu) => {
+            setCurrentUser(cu)
+            setViewPort({
+                latitude: cu.homeZip.latitude,
+                longitude: cu.homeZip.longitude,
+                width: "100",
+                height: "100",
+                zoom: 12
+            })
+        })
         // eslint-disable-next-line
     },[])
-    debugger
-    useEffect(() => {
-        setViewPort({
-            latitude: currentUser.homeZip.latitude,
-            longitude: currentUser.homeZip.longitude,
-            width: "100",
-            height: "100",
-            zoom: 12
-        })
-    },[currentUser])
+    
+    const [viewport, setViewPort] = useState({
+        latitude: 0,
+        longitude: 0,
+        width: "100",
+        height: "100",
+        zoom: 5
+    })
+    
 
 
     const ClusterMarker = ({ longitude, latitude, pointCount }) => (
@@ -99,12 +99,11 @@ export default function Explore() {
         ) : null
     )
 
-
     return (
         <MapGL
             style={{width: '100vw', height: '100vh'}}
             {...viewport}
-            maxZoom = {15}
+            maxZoom = {13}
             accessToken={process.env.REACT_APP_MAPBOX_TOKEN}
             mapStyle="mapbox://styles/durrjp/ckd6b1pjv02ad1iqra64vul75?optimize=true"
             onViewportChange={newViewport => {
@@ -114,11 +113,10 @@ export default function Explore() {
         >
             <Cluster
                 ref={clusterRef}
-                radius={100}
+                radius={40}
                 extent={512}
                 nodeSize={64}
                 component= {ClusterMarker}
-                
             >
                 {allZips.map(point => (
                     <Marker

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ZipMarkets.Data;
@@ -10,6 +12,7 @@ using ZipMarkets.Repositories;
 
 namespace ZipMarkets.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -26,16 +29,15 @@ namespace ZipMarkets.Controllers
             return Ok(_userRepository.GetByFirebaseUserId(firebaseUserId));
         }
 
-        [HttpGet("id/{id}")]
-        public IActionResult GetUserById(int id)
-        {
-            return Ok(_userRepository.GetUserById(id));
-        }
-
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_userRepository.GetAll());
+            var currentUser = GetCurrentUserProfile();
+            if (currentUser == null)
+            {
+                return NotFound();
+            }
+            return Ok(_userRepository.GetUserById(currentUser.Id));
         }
 
         [HttpPost]
@@ -55,6 +57,12 @@ namespace ZipMarkets.Controllers
         {
             _userRepository.Update(user);
             return Ok(user);
+        }
+
+        private User GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userRepository.GetByFirebaseUserId(firebaseUserId);
         }
     }
 }

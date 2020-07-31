@@ -13,7 +13,7 @@ import { UserContext } from "../../providers/UserProvider"
 export default function ZipDetails() {
     const {getZipById} = useContext(ZipContext)
     const {addPinnedMarket, deletePinnedMarket} = useContext(PinnedMarketContext)
-    const {getUserById} = useContext(UserContext)
+    const {getUser} = useContext(UserContext)
     const [currentUser, setCurrentUser] = useState({
         userPinnedMarkets: []
     })
@@ -25,14 +25,13 @@ export default function ZipDetails() {
     const id = useParams()
     const parsedId = parseInt(id.id)
     const [isPinned, setIsPinned] = useState(false)
-    const currentUserSesh = JSON.parse(sessionStorage.getItem("user"));
 
     useEffect(() => {
-        getUserById(currentUserSesh.id).then(setCurrentUser)
+        getUser().then(setCurrentUser)
     },[])
 
     useEffect(() => {
-        getUserById(currentUserSesh.id).then(setCurrentUser)
+        getUser().then(setCurrentUser)
     },[isPinned])
     
     useEffect(() => {

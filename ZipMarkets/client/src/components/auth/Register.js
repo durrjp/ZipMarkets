@@ -1,11 +1,13 @@
 import React, { useState, useContext } from "react";
-import { Button, Form, FormGroup, Label, Input, Card, CardBody } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Card, CardBody, Alert } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../../providers/UserProvider";
+import { ZipContext } from "../../providers/ZipProvider";
 
 export default function Register() {
   const history = useHistory();
-  const { register } = useContext(UserContext);
+  const { register} = useContext(UserContext);
+  const {getZipByZipCode} = useContext(ZipContext)
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [displayName, setDisplayName] = useState();
@@ -27,13 +29,23 @@ export default function Register() {
         lastName,
         displayName,
         email,
-        homeZip,
+        homeZipId: homeZip,
         minHomePrice,
         maxHomePrice
       };
       register(userProfile, password).then(() => history.push("/"));
     }
   };
+
+  const checkValidZip = (zip) => {
+    getZipByZipCode(zip).then(res => {
+      if(!res.title === "Not Found") {
+        setHomeZip(res)
+      } else {
+        alert("Zip Code not found")
+      }
+    })
+  }
   return (
     <div className="container pt-4">
       <div className="row justify-content-center">
@@ -78,7 +90,7 @@ export default function Register() {
                   <Input
                     id="homezip"
                     type="number"
-                    onChange={(e) => setHomeZip(e.target.value)}
+                    onChange={(e) => checkValidZip(e.target.value)}
                   />
                 </FormGroup>
                 <FormGroup>

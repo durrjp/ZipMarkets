@@ -74,18 +74,18 @@ export function UserProvider(props) {
     );
   };
 
-  const getUsers = () => {
-    getToken().then((token) =>
-      fetch(apiUrl, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((resp) => resp.json())
-        .then(setUsers)
-    );
-  };
+  // const getUsers = () => {
+  //   getToken().then((token) =>
+  //     fetch(apiUrl, {
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //       .then((resp) => resp.json())
+  //       .then(setUsers)
+  //   );
+  // };
 
   const saveUser = (user) => {
     return getToken().then((token) =>
@@ -100,9 +100,9 @@ export function UserProvider(props) {
     );
   };
 
-  const getUserById = (id) => {
+  const getUser = () => {
     return getToken().then((token) =>
-      fetch(`${apiUrl}/id/${id}`, {
+      fetch(apiUrl, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -121,7 +121,7 @@ export function UserProvider(props) {
         },
         body: JSON.stringify(user),
       })
-      .then(getUsers)
+      .then(getUser)
     );
   };
 
@@ -133,9 +133,8 @@ export function UserProvider(props) {
         logout,
         register,
         getToken,
-        getUserById,
+        getUser,
         isAdmin,
-        getUsers,
         users,
         editUser,
       }}

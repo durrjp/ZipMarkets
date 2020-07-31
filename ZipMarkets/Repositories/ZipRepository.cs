@@ -34,5 +34,13 @@ namespace ZipMarkets.Repositories
                             .Where(z => z.Id == id)
                             .FirstOrDefault();
         }
+
+        public Zip GetByZipCode(int zipCode)
+        {
+            return _context.AllZips
+                           .Include(z => z.State)
+                           .Where(z => z.ZipCode == zipCode)
+                           .FirstOrDefault();
+        }
     }
 }

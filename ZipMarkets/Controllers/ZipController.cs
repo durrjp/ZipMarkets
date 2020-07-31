@@ -42,6 +42,17 @@ namespace ZipMarkets.Controllers
             return Ok(zip);
         }
 
+        [HttpGet("getbyzip/{zipCode}")]
+        public IActionResult GetByZip(int zipCode)
+        {
+            var zip = _zipRepository.GetByZipCode(zipCode);
+            if (zip == null)
+            {
+                return NotFound();
+            }
+            return Ok(zip);
+        }
+
         private User GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;

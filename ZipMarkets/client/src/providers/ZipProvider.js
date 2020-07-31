@@ -28,8 +28,18 @@ export default function ZipProvider(props) {
       }).then((res) => res.json()))
     )
 
+    const getZipByZipCode = (zipCode) => (
+      getToken().then((token) => 
+      fetch(`/api/zip/getbyzip/${zipCode}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then((res) => res.json()))
+    )
+
     return (
-        <ZipContext.Provider value={{getAllZips, allZips, getZipById }}>
+        <ZipContext.Provider value={{getAllZips, allZips, getZipById, getZipByZipCode }}>
             {props.children}
         </ZipContext.Provider>
         );
