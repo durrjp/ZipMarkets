@@ -19,5 +19,6 @@ namespace ZipMarkets.Models
         public UserType UserType { get; set; }
         public int MinHomePrice { get; set; }
         public int MaxHomePrice { get; set; }
+        public List<PinnedMarket> UserPinnedMarkets { get; set; }
     }
 }

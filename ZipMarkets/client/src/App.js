@@ -5,14 +5,17 @@ import './App.css';
 import ApplicationViews from './components/ApplicationViews';
 import Header from './components/header/Header';
 import ZipProvider from './providers/ZipProvider';
+import PinnedMarketProvider from './providers/PinnedMarketProvider';
 
 function App() {
   return (
     <Router>
       <UserProvider>
         <ZipProvider>
-          <Header />
-          <ApplicationViews />
+          <PinnedMarketProvider>
+            <Header />
+            <ApplicationViews />
+          </PinnedMarketProvider>
         </ZipProvider>
       </UserProvider>
     </Router>
