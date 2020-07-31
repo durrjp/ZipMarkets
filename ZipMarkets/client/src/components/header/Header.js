@@ -10,6 +10,7 @@ import {
     NavbarToggler
 } from 'reactstrap';
 import { UserContext } from "../../providers/UserProvider";
+import logo from "../../images/ZipMarketsSmall.png"
 
 
 export default function Header() {
@@ -22,7 +23,7 @@ export default function Header() {
         <div>
             <Navbar color="light" light expand="md">
                 <NavbarBrand>
-                    Zip Markets
+                    <img height="40px" src={logo} alt="logo" />
                 </NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>

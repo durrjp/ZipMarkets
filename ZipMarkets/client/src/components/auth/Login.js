@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Button, Form, FormGroup, Label, Input, Card, CardBody } from "reactstrap";
 import { useHistory, Link } from "react-router-dom";
 import { UserContext } from "../../providers/UserProvider";
+import logo from "../../images/ZipMarkets.png"
 
 export default function Login() {
   const history = useHistory();
@@ -20,8 +21,10 @@ export default function Login() {
   }
 
   return (
+    <>
     <div className="container pt-4">
       <div className="row justify-content-center">
+    <img src={logo} alt="logo" />
         <Card className="col-sm-12 col-lg-6">
           <CardBody>
             <Form onSubmit={(e) => {
@@ -62,5 +65,6 @@ export default function Login() {
         </Card>
       </div>
     </div>
+    </>
   );
 }
