@@ -4,6 +4,7 @@ import Login from "./auth/Login";
 import { UserContext } from "../providers/UserProvider";
 import Explore from "./explore/Explore";
 import ZipDetails from "./zipDetails/ZipDetails";
+import Dashboard from "./dashboard/Dashboard";
 
 export default function ApplicationViews() {
     const { isLoggedIn, isAdmin } = useContext(UserContext);
@@ -12,6 +13,10 @@ export default function ApplicationViews() {
             <Switch>
                 <Route path="/" exact>
                     {   isLoggedIn ? <Explore /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/dashboard" exact>
+                    {   isLoggedIn ? <Dashboard /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/zip/:id" exact>

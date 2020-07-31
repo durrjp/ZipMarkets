@@ -8,10 +8,15 @@ import COLTable from "./COLTable"
 import {ReactComponent as Pinned} from "../../images/Pinned.svg"
 import NotPinned from "../../images/NotPinned.png"
 import { PinnedMarketContext } from "../../providers/PinnedMarketProvider"
+import { UserContext } from "../../providers/UserProvider"
 
 export default function ZipDetails() {
     const {getZipById} = useContext(ZipContext)
     const {addPinnedMarket, deletePinnedMarket} = useContext(PinnedMarketContext)
+    const {getUserById} = useContext(UserContext)
+    const [currentUser, setCurrentUser] = useState({
+        userPinnedMarkets: []
+    })
     const [oneZip, setOneZip] = useState({
         hpiList: [],
         zvhiList: [],
@@ -20,22 +25,32 @@ export default function ZipDetails() {
     const id = useParams()
     const parsedId = parseInt(id.id)
     const [isPinned, setIsPinned] = useState(false)
-    const currentUser = JSON.parse(sessionStorage.getItem("user"));
+    const currentUserSesh = JSON.parse(sessionStorage.getItem("user"));
 
     useEffect(() => {
-        currentUser.userPinnedMarkets.map(pm => {
-            if(pm.zipCodeId === oneZip.id) {
-                setIsPinned(true)
-            }
-        })
+        getUserById(currentUserSesh.id).then(setCurrentUser)
     },[])
+
+    useEffect(() => {
+        getUserById(currentUserSesh.id).then(setCurrentUser)
+    },[isPinned])
+    
+    useEffect(() => {
+        getZipById(parsedId).then(setOneZip)
+    },[])
+    
+    useEffect(() => {
+        if(currentUser.userPinnedMarkets.find(pm => pm.zipCodeId === oneZip.id))
+        {
+            setIsPinned(true)
+        }
+    },[oneZip])
     
     const handlePin = () => {
         setIsPinned(!isPinned)
-        debugger
         if(isPinned) {
             const foundPM = currentUser.userPinnedMarkets.find(pm => pm.zipCodeId === oneZip.id)
-            deletePinnedMarket(foundPM)
+            deletePinnedMarket(foundPM.id)
         }
         else {
             const newPM = {
@@ -46,13 +61,8 @@ export default function ZipDetails() {
         }
     }
 
-    
-    useEffect(() => {
-        getZipById(parsedId).then(setOneZip)
-    },[])
-
     const pinnedStatus = () => {
-        if (isPinned === true) {
+        if (isPinned) {
             return (
                 <Pinned onClick={handlePin} style={{width: '34px', height: '57px'}}/>
             )
@@ -62,7 +72,6 @@ export default function ZipDetails() {
         }
     }
     
-
     return (
         <>
         <div className="title-Container">

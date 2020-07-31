@@ -16,11 +16,6 @@ export default function PinnedMarketProvider(props) {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(pm),
-          }).then((resp) => {
-            if (resp.ok) {
-              return resp.json();
-            }
-            throw new Error("Unauthorized");
           })
         );
       };
