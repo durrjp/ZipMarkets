@@ -15,15 +15,15 @@ export default function Dashboard() {
     },[])
 
     return (
-        <>
-        <div className="pinnedMarkets-container">
-            <h1>Pinned Markets</h1>
-            {
-                currentUser.userPinnedMarkets.map(pm => {
-                    return <PinnedMarket key={pm.id} pm={pm}  />
-                })
-            }
-        </div>
-        </>
+        <main className="dashboard-container">
+            <div className="pinnedMarkets-container">
+                <h1 style={{color: "white"}}>Pinned Markets</h1>
+                {
+                    currentUser.userPinnedMarkets.map(pm => {
+                        return <PinnedMarket key={pm.id} pm={pm}  />
+                    })
+                }
+            </div>
+        </main>
     )
 }

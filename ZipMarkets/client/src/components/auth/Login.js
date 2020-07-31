@@ -2,7 +2,8 @@ import React, { useState, useContext } from "react";
 import { Button, Form, FormGroup, Label, Input, Card, CardBody } from "reactstrap";
 import { useHistory, Link } from "react-router-dom";
 import { UserContext } from "../../providers/UserProvider";
-import logo from "../../images/ZipMarkets.png"
+import logo from "../../images/ZipMarketsSmall.png"
+import "./Login.css"
 
 export default function Login() {
   const history = useHistory();
@@ -22,15 +23,19 @@ export default function Login() {
 
   return (
     <>
+    <main className="login-container">
+    
     <div className="container pt-4">
       <div className="row justify-content-center">
-    <img src={logo} alt="logo" />
         <Card className="col-sm-12 col-lg-6">
           <CardBody>
+              <div className="row justify-content-center">
+                    <img src={logo} alt="logo" />
+              </div>
             <Form onSubmit={(e) => {
               e.preventDefault()
               loginSubmit()
-              }}>
+            }}>
               <fieldset>
                 <FormGroup>
                   <Label for="email">Email</Label>
@@ -65,6 +70,7 @@ export default function Login() {
         </Card>
       </div>
     </div>
+    </main>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Collapse, Button, CardBody, Card, CardText } from 'reactstrap';
 import { useHistory } from "react-router-dom";
+import "./Dashboard.css"
 
 
 export default function PinnedMarket({pm}) {
@@ -12,7 +13,7 @@ export default function PinnedMarket({pm}) {
     }
 
     return (
-        <div>
+        <div className="pm-container">
             <Card body>
                 <Button outline color="info" onClick={toggle} style={{ marginBottom: '1rem' }}>{pm.zipCode.zipCode}</Button>
                 <Collapse isOpen={isOpen}>

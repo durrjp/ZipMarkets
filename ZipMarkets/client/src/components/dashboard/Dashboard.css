@@ -1,4 +1,14 @@
+.dashboard-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #373A62;
+}
+
 .pinnedMarkets-container {
     width:45%;
     text-align: center;
+}
+
+.pm-container {
+    margin: 1em
 }
