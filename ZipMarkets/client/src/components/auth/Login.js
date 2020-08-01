@@ -24,7 +24,6 @@ export default function Login() {
   return (
     <>
     <main className="login-container">
-    
     <div className="container pt-4">
       <div className="row justify-content-center">
         <Card className="col-sm-12 col-lg-6">

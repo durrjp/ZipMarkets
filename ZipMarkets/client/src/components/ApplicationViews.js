@@ -6,6 +6,7 @@ import Explore from "./explore/Explore";
 import ZipDetails from "./zipDetails/ZipDetails";
 import Dashboard from "./dashboard/Dashboard";
 import Register from "./auth/Register";
+import MyProfile from "./myProfle/MyProfile";
 
 export default function ApplicationViews() {
     const { isLoggedIn, isAdmin } = useContext(UserContext);
@@ -22,6 +23,10 @@ export default function ApplicationViews() {
 
                 <Route path="/zip/:id" exact>
                     {isLoggedIn ? <ZipDetails /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/myprofile" exact>
+                    {   isLoggedIn ? <MyProfile /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/login">

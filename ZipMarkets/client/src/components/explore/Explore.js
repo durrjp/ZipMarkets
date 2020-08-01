@@ -17,7 +17,6 @@ const markerStyle = {
 
 export default function Explore() {
     const [currentUser, setCurrentUser] = useState()
-    const currentUserSesh = JSON.parse(sessionStorage.getItem("user"));
     const {getUser} = useContext(UserContext)
     const mapRef= useRef();
     const clusterRef = useRef();
@@ -31,7 +30,7 @@ export default function Explore() {
     },[])
     
     useEffect(() => {
-        getUser(currentUserSesh.id).then((cu) => {
+        getUser().then((cu) => {
             setCurrentUser(cu)
             setViewPort({
                 latitude: cu.homeZip.latitude,

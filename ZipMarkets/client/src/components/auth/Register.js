@@ -91,7 +91,7 @@ export default function Register() {
   }
   
   return (
-    <main className="login-container">
+    <main className="register-container">
     <div className="container pt-4">
       <div className="row justify-content-center">
         <Card className="col-sm-12 col-lg-6">
