@@ -18,5 +18,6 @@ namespace ZipMarkets.Models
         public decimal? Longitude { get; set; }
         public List<HPIClass> HPIList { get; set; }
         public List<ZVHIClass> ZVHIList { get; set; }
+        public List<Message> MessageList { get; set; }
     }
 }

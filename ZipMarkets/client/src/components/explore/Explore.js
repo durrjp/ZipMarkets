@@ -10,7 +10,7 @@ import { UserContext } from "../../providers/UserProvider";
 const markerStyle = {
     padding: '3px',
     color: '#000000',
-    background: '#98E6FF',
+    background: '#E6E8F9',
     borderRadius: '8px',
     textAlign: 'center'
   };

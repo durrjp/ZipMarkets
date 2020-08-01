@@ -31,6 +31,8 @@ namespace ZipMarkets.Repositories
                             .Include(z => z.State)
                             .Include(z => z.HPIList)
                             .Include(z => z.ZVHIList)
+                            .Include(z => z.MessageList)
+                            .ThenInclude(m => m.Category)
                             .Where(z => z.Id == id)
                             .FirstOrDefault();
         }

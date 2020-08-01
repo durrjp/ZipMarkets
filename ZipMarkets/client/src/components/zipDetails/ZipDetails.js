@@ -9,6 +9,7 @@ import {ReactComponent as Pinned} from "../../images/Pinned.svg"
 import NotPinned from "../../images/NotPinned.png"
 import { PinnedMarketContext } from "../../providers/PinnedMarketProvider"
 import { UserContext } from "../../providers/UserProvider"
+import Feed from "./Feed"
 
 export default function ZipDetails() {
     const {getZipById} = useContext(ZipContext)
@@ -89,7 +90,7 @@ export default function ZipDetails() {
             <COLTable oneZip={oneZip} />
         </div>
         <div className="feed-container">
-            Live Feed
+            <Feed oneZip={oneZip} />
         </div>
         </>
     )
