@@ -6,6 +6,7 @@ import ApplicationViews from './components/ApplicationViews';
 import Header from './components/header/Header';
 import ZipProvider from './providers/ZipProvider';
 import PinnedMarketProvider from './providers/PinnedMarketProvider';
+import MessageProvider from './providers/MessageProvider';
 
 
 function App() {
@@ -14,8 +15,10 @@ function App() {
       <UserProvider>
         <ZipProvider>
           <PinnedMarketProvider>
-            <Header />
-            <ApplicationViews />
+            <MessageProvider>
+              <Header />
+              <ApplicationViews />
+            </MessageProvider>
           </PinnedMarketProvider>
         </ZipProvider>
       </UserProvider>

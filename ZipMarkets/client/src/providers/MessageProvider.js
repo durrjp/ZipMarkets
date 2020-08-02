@@ -5,7 +5,8 @@ export const MessageContext = createContext();
 
 export default function MessageProvider(props) {
     const { getToken } = useContext(UserContext);
-    const apiUrl = "/api/message/";
+    const apiUrl = "/api/messages/";
+
     const addMessage = (mess) => {
         return getToken().then((token) =>
           fetch(apiUrl, {

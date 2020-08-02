@@ -7,11 +7,11 @@ using ZipMarkets.Models;
 
 namespace ZipMarkets.Repositories
 {
-    public class MessageRepository
+    public class MessagesRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public MessageRepository(ApplicationDbContext context)
+        public MessagesRepository(ApplicationDbContext context)
         {
             _context = context;
         }

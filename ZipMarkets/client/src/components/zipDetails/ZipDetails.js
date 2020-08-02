@@ -21,7 +21,8 @@ export default function ZipDetails() {
     const [oneZip, setOneZip] = useState({
         hpiList: [],
         zvhiList: [],
-        state: []
+        state: [],
+        messageList: []
     })
     const id = useParams()
     const parsedId = parseInt(id.id)
@@ -45,6 +46,10 @@ export default function ZipDetails() {
             setIsPinned(true)
         }
     },[oneZip])
+
+    const refreshZip = () => {
+        getZipById(parsedId).then(setOneZip)
+    }
     
     const handlePin = () => {
         setIsPinned(!isPinned)
@@ -90,7 +95,7 @@ export default function ZipDetails() {
             <COLTable oneZip={oneZip} />
         </div>
         <div className="feed-container">
-            <Feed oneZip={oneZip} />
+            <Feed refreshZip={refreshZip} oneZip={oneZip} />
         </div>
         </>
     )

@@ -14,13 +14,13 @@ namespace ZipMarkets.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class MessageController : ControllerBase
+    public class MessagesController : ControllerBase
     {
-        private readonly MessageRepository _messageRepo;
+        private readonly MessagesRepository _messageRepo;
 
-        public MessageController(ApplicationDbContext context)
+        public MessagesController(ApplicationDbContext context)
         {
-            _messageRepo = new MessageRepository(context);
+            _messageRepo = new MessagesRepository(context);
         }
 
         [HttpPost]
