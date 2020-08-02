@@ -27,7 +27,7 @@ namespace ZipMarkets.Controllers
         public IActionResult Post(Message mess)
         {
             _messageRepo.Add(mess);
-            return CreatedAtAction("Get", new { id = mess.Id }, mess);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
