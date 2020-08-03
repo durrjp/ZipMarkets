@@ -2,3 +2,8 @@
     width: 100%;
     height: 100%
 }
+
+.explore-btn {
+    background-color: #6a6a6e !important;
+    margin-left: .5em;
+}

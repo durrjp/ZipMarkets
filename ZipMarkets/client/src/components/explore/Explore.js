@@ -148,6 +148,7 @@ export default function Explore() {
                 <Button
                     type="submit"
                     title="Go to zip code"
+                    className="explore-btn"
                     onClick={(e) => {
                         e.preventDefault()
                         goToZip()
@@ -158,6 +159,7 @@ export default function Explore() {
                 <Button
                     type="submit"
                     title="Go Home"
+                    className="explore-btn"
                     onClick={(e) => {
                         e.preventDefault()
                         goHome()
@@ -178,6 +180,7 @@ export default function Explore() {
                 <Button
                     type="submit"
                     title="Zoom out"
+                    className="explore-btn"
                     onClick={(e) => {
                         e.preventDefault()
                         zoomOut()
