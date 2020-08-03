@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ZipMarkets.Data;
 using ZipMarkets.Models;
+using ZipMarkets.Models.ViewModels;
 
 namespace ZipMarkets.Repositories
 {
@@ -22,6 +23,30 @@ namespace ZipMarkets.Repositories
             return _context.AllZips
                             .Include(z => z.State)
                             .Where(z => z.Latitude != null && z.Longitude != null)
+                            .ToList();
+        }
+
+        public List<HPIAvgViewModel> GetHPIAvgs()
+        {
+            return _context.AllHPIs
+                            .GroupBy(hpi => hpi.Year)
+                            .Select(g => new HPIAvgViewModel()
+                            {
+                                Year = g.Key,
+                                Average = g.Average(h => h.HPI)
+                            })
+                            .ToList();                      
+        }
+
+        public List<ZVHIAvgViewModel> GetZVHIAvgs()
+        {
+            return _context.AllZVHIs
+                            .GroupBy(zvhi => zvhi.Date)
+                            .Select(g => new ZVHIAvgViewModel()
+                            {
+                                Date = g.Key,
+                                Average = g.Average(z => z.Value)
+                            })
                             .ToList();
         }
 

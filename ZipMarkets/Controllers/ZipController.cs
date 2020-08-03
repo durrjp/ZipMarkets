@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -51,6 +52,18 @@ namespace ZipMarkets.Controllers
                 return NotFound();
             }
             return Ok(zip);
+        }
+
+        [HttpGet("/getavghpi")]
+        public IActionResult GetAvgHPIs()
+        {
+            return Ok(_zipRepository.GetHPIAvgs());
+        }
+
+        [HttpGet("/getavgzvhi")]
+        public IActionResult GetAvgZVHIs()
+        {
+            return Ok(_zipRepository.GetZVHIAvgs());
         }
 
         private User GetCurrentUserProfile()

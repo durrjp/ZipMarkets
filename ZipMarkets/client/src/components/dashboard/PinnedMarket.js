@@ -1,35 +1,26 @@
-import React, { useState } from "react"
-import { Collapse, Button, CardBody, Card, CardText } from 'reactstrap';
-import { useHistory } from "react-router-dom";
+import React from "react"
+import { Button} from 'reactstrap';
 import "./Dashboard.css"
 
 
-export default function PinnedMarket({pm}) {
-    const history = useHistory();
-    const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
-    const handleClick = () => {
-        history.push(`/zip/${pm.zipCode.id}`);
+export default function PinnedMarket({pm, setPinView, pinView}) {
+    
+    const isSelected = () => {
+        if(pm.id === pinView.id) {
+            return "pm-btn-selected"
+        }
+        else {
+            return "pm-btn"
+        }
     }
-
     return (
         <div className="pm-container">
-            <Card body>
-                <Button outline color="info" onClick={toggle} style={{ marginBottom: '1rem' }}>{pm.zipCode.zipCode}</Button>
-                <Collapse isOpen={isOpen}>
-                    <Card>
-                    <CardBody>
-                        <CardText>
-                            Anim pariatur cliche reprehenderit,
-                            enim eiusmod high life accusamus terry richardson ad squid. Nihil
-                            anim keffiyeh helvetica, craft beer labore wes anderson cred
-                            nesciunt sapiente ea proident.
-                        </CardText>
-                        <Button onClick={handleClick}>Details</Button>
-                    </CardBody>
-                    </Card>
-                </Collapse>
-            </Card>
+            <Button className={isSelected()} onClick={(e) => {
+                e.preventDefault()
+                setPinView(pm)}}>
+                <div>{pm.zipCode.zipCode}</div>
+                <div>{pm.zipCode.city}, {pm.zipCode.state.stateAbbr}</div>
+            </Button>
         </div>
     )
 }

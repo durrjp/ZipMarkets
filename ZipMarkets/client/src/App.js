@@ -17,7 +17,7 @@ function App() {
           <PinnedMarketProvider>
             <MessageProvider>
               <Header />
-              <ApplicationViews />
+              <ApplicationViews  />
             </MessageProvider>
           </PinnedMarketProvider>
         </ZipProvider>

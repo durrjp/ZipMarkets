@@ -96,7 +96,6 @@ export default function MyProfile() {
             minHomePrice,
             maxHomePrice
           };
-          debugger
           editUser(user)
           alert("Settings have been updated!")
     }

@@ -1,14 +1,35 @@
 .dashboard-container {
-    width: 100vw;
     height: 100vh;
     background-color: #373A62;
+    display:flex;
+    flex-flow: column nowrap;
+}
+
+.secondmain-container {
+    display:flex;
 }
 
 .pinnedMarkets-container {
-    width:45%;
-    text-align: center;
+    width: 50%;
+    display: flex;
+    flex-flow: row wrap;
 }
 
 .pm-container {
-    margin: 1em
+    margin: .5em;
 }
+
+.pm-btn {
+    background-color: #E6E8F9 !important;
+    color: black !important
+}
+
+.pm-btn-selected {
+    background-color: #FFBB63 !important;
+    color: black !important
+}
+
+.pinView-container {
+    width: 40%
+}
+
