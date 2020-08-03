@@ -27,7 +27,7 @@ namespace ZipMarkets.Controllers
         public IActionResult Post(PinnedMarket pm)
         {
             _pmRepo.Add(pm);
-            return CreatedAtAction("Get", new { id = pm.Id }, pm);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]

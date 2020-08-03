@@ -66,9 +66,9 @@ export default function HPIGraph({oneZip}) {
 
         />
         <div>
-            <div>% Change Last Year: {yearPercChange.toFixed(2)}</div>
-            <div>% Change Last 5 Years: {fiveYearPercChange.toFixed(2)}</div>
-            <div>% Change Last 10 Years: {tenYearPercChange.toFixed(2)}</div>
+            <div>Change 1 Year: {yearPercChange.toFixed(2)}%</div>
+            <div>Change 5 Years: {fiveYearPercChange.toFixed(2)}%</div>
+            <div>Change 10 Years: {tenYearPercChange.toFixed(2)}%</div>
         </div>
         </>
     )
