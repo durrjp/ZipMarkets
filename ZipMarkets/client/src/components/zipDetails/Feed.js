@@ -70,7 +70,6 @@ export default function Feed({oneZip, refreshZip}) {
                 size="md"
                 onClick={(e) => {
                     e.preventDefault()
-                    debugger
                     saveMessage()
                     refreshZip()
                 }}

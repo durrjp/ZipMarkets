@@ -16,7 +16,7 @@ export default function MyProfile() {
     useEffect(() => {
         getUser().then((cu) => {
             setCurrentUser(cu)
-            setHomeZip(cu.homeZip.id)
+            setHomeZip(cu.homeZip)
             setDisplayName(cu.displayName)
             setHomePriceMin(cu.minHomePrice)
             setHomePriceMax(cu.maxHomePrice)
@@ -81,7 +81,8 @@ export default function MyProfile() {
       }
 
 
-    const saveSettings = () => {
+    const saveSettings = (e) => {
+        e.preventDefault()
         const user = {
             id: currentUser.id,
             userTypeId: currentUser.userTypeId,
@@ -91,12 +92,13 @@ export default function MyProfile() {
             createDateTime: currentUser.createDateTime,
             displayName,
             email: currentUser.email,
-            homeZipId: homeZip,
+            homeZipId: homeZip.id,
             minHomePrice,
             maxHomePrice
           };
           debugger
           editUser(user)
+          alert("Settings have been updated!")
     }
     return (
         <>
