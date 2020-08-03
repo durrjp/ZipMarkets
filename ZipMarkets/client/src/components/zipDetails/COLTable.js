@@ -12,7 +12,7 @@ export default function COLTable({oneZip}) {
     }
 
     return (
-        <Table>
+        <Table style={{backgroundColor: "white"}}>
             <thead>
                 <tr>
                     <th>State</th>

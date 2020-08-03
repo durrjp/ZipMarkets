@@ -10,6 +10,7 @@ import NotPinned from "../../images/NotPinned.png"
 import { PinnedMarketContext } from "../../providers/PinnedMarketProvider"
 import { UserContext } from "../../providers/UserProvider"
 import Feed from "./Feed"
+import { Card } from "reactstrap"
 
 export default function ZipDetails() {
     const {getZipById} = useContext(ZipContext)
@@ -69,34 +70,42 @@ export default function ZipDetails() {
     const pinnedStatus = () => {
         if (isPinned) {
             return (
-                <Pinned onClick={handlePin} style={{width: '34px', height: '57px'}}/>
+                <div title="Pinned" className="pin-container">
+                    <Pinned onClick={handlePin} style={{width: '34px', height: '57px'}}/>
+                </div>
             )
         }
         else {
-            return <img onClick={handlePin} width= '34px' height= '57px' src={NotPinned} alt="not pinned"  />
+            return (
+                <div title="Not pinned" className="pin-container">
+                    <img onClick={handlePin} width= '34px' height= '57px' src={NotPinned} alt="not pinned"  />
+                </div>
+            )
         }
     }
     
     return (
         <>
-        <div className="title-Container">
-            <h1>{oneZip.zipCode} {oneZip.city}, {oneZip.state.stateAbbr}</h1>
-            {pinnedStatus()}
-        </div>
-        <div className="graphs-container">
-            <div className ="oneGraph">
-            <HPIGraph oneZip={oneZip} />
+        <main className="maindetails-container">
+            <div className="title-container">
+                <h1>{oneZip.zipCode} {oneZip.city}, {oneZip.state.stateAbbr}</h1>
+                {pinnedStatus()}
             </div>
-            <div className="oneGraph">
-            <ZVHIGraph oneZip={oneZip} />
+            <div className="graphs-container">
+                <div className ="oneGraph">
+                    <HPIGraph oneZip={oneZip} />
+                </div>
+                <div className="oneGraph">
+                    <ZVHIGraph oneZip={oneZip} />
+                </div>
             </div>
-        </div>
-        <div className="COL-container">
-            <COLTable oneZip={oneZip} />
-        </div>
-        <div className="feed-container">
-            <Feed refreshZip={refreshZip} oneZip={oneZip} />
-        </div>
+            <div className="COL-container">
+                <COLTable oneZip={oneZip} />
+            </div>
+            <div className="feed-container">
+                <Feed refreshZip={refreshZip} oneZip={oneZip} />
+            </div>
+        </main>
         </>
     )
 }
