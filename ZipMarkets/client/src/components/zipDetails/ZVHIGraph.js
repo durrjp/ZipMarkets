@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import {Line} from "react-chartjs-2"
 import { ZVHIContext } from "../../providers/ZVHIProvider"
+import { Table } from "reactstrap"
 
 
 export default function ZVHIGraph({oneZip}) {
@@ -20,7 +21,7 @@ export default function ZVHIGraph({oneZip}) {
         const splitDate = zvhi.date.split("")
         return `${splitDate[0]}${splitDate[1]}${splitDate[2]}${splitDate[3]}`
     } )
-    const usValueArray = avgZVHIs.map(zvhi => zvhi.average.toFixed(2))
+    const usValueArray = avgZVHIs.map(zvhi => zvhi.average.toFixed())
     const valueArray = oneZip.zvhiList.map(zvhi => zvhi.value)
     const data ={
         labels: usYearArray,
@@ -57,58 +58,93 @@ export default function ZVHIGraph({oneZip}) {
                 pointBorderWidth: 1,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                fontColor: "white"
+                fontColor: "white",
             }
 
         ]
     }
 
-    if(oneZip.zvhiList.length === 0) {
+    if(oneZip.zvhiList.length === 0 || avgZVHIs.length === 0) {
         return null
     }
     const newArray = oneZip.zvhiList.slice()
     const reverseArray = newArray.reverse()
-    const yearPercChange = ((reverseArray[0].value - reverseArray[1].value) / reverseArray[1].value)*100
-    const fiveYearPercChange = ((reverseArray[0].value - reverseArray[4].value) / reverseArray[4].value)*100
+    const yearPercChange = (((reverseArray[0].value - reverseArray[1].value) / reverseArray[1].value)*100).toFixed(2)
+    const fiveYearPercChange = (((reverseArray[0].value - reverseArray[4].value) / reverseArray[4].value)*100).toFixed(2)
+
+    const newUSArray = avgZVHIs.slice()
+    const reverseUsArray = newUSArray.reverse()
+    const yearUSPercChange = (((reverseUsArray[0].average - reverseUsArray[1].average) / reverseUsArray[1].average)*100).toFixed(2)
+    const fiveUSYearPercChange = (((reverseUsArray[0].average - reverseUsArray[4].average) / reverseUsArray[4].average)*100).toFixed(2)
 
 
     return (
         <>
+        <h3 style={{textAlign: "center", marginBottom: "1em"}}>Median Home Price (Zillow)</h3>
         <Line 
             data={data}
             options={{
+                legend: {
+                    labels: {
+                        fontColor: "rgb(236, 236, 236)"
+                    }
+                },
                 scales: {
                     yAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: "Home Value",
-                            fontSize:15
+                            labelString: "Home Value ($)",
+                            fontSize:15,
+                            fontColor: "rgb(236, 236, 236)"
                         },
                         ticks: {
-                            // Include a dollar sign in the ticks
-                            callback: function(value, index, values) {
-                                if(value >= 1000){
-                                    return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                } else {
-                                return '$' + value;
-                                }
-                            }
+                            fontColor: "rgb(236, 236, 236)"
+                        },
+                        gridLines: {
+                            color: "rgb(168, 168, 168,.3)"
                         }
                     }],
                     xAxes: [{
                         scaleLabel: {
                             display: true,
                             labelString: "Year",
-                            fontSize: 15
+                            fontSize: 15,
+                            fontColor: "rgb(236, 236, 236)"
+                        },
+                        ticks: {
+                            fontColor: "rgb(236, 236, 236)"
+                        },
+                        gridLines: {
+                            color: "rgb(168, 168, 168,.3)"
                         }
                     }]
+                },
+                labels: {
+                    fontColor: "white"
                 }
             }}
         />
-        <div>
-            <div>Change 1 Year: {yearPercChange.toFixed(2)}%</div>
-            <div>Change 5 Years: {fiveYearPercChange.toFixed(2)}%</div>
-        </div>
+        <Table style={{marginTop:"1em", color: "white", border:"5px solid", borderColor: "rgb(0,0,0,.5)"}}>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>% Change - 1 Year</th>
+                        <th>% Change - 5 Years</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>{oneZip.zipCode}</th>
+                        <td>{yearPercChange}%</td>
+                        <td>{fiveYearPercChange}%</td>
+                    </tr>
+                    <tr>
+                        <th>US Average</th>
+                        <td>{yearUSPercChange}%</td>
+                        <td>{fiveUSYearPercChange}%</td>
+                    </tr>
+                </tbody>
+            </Table>
         </>
     )
 }

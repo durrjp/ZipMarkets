@@ -2,6 +2,8 @@
     width: 100%;
     height: 100%;
     padding: 1em;
+    background-color: #373A62;
+    color: rgb(236, 236, 236)
 }
 
 .graphs-container {
@@ -16,7 +18,7 @@
 }
 
 .pin-container {
-    margin-left:1em
+    margin-left:1em;
 }
 
 .pin-container:hover {
@@ -25,6 +27,12 @@
 
 .title-container {
     display: flex;
-    width: 100%;
     justify-content: center;
+    background-color: rgb(236, 236, 236);
+    margin: auto;
+    padding: 1em;
+    color: black;
+    border-radius: 10px;
+    width: fit-content;
+    box-shadow: 5px 5px #f6eded2c;
 }

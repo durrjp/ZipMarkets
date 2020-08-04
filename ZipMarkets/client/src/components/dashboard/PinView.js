@@ -27,19 +27,23 @@ export default function PinView({pinView, currentUser, refresh, setPinView}) {
             </Card>
         )
     }
-    
+    const zvhiValue = pinView.zipCode.zvhiList.slice(-1)[0].value
+    const newzvhiValue = zvhiValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
     return(
         <>
             <Card>
                 <CardBody>
                     <CardText>
+                        <div className="unpinbtn-container">
+                            <Button className="unpinbtn" onClick={unpin}>Unpin</Button>
+                        </div>
                         <h3>{pinView.zipCode.zipCode}</h3>
                         <p>{pinView.zipCode.city}, {pinView.zipCode.state.stateName}</p>
                         <p>{pinView.zipCode.county}</p>
-                        <p>Current Median Home Price: ${pinView.zipCode.zvhiList.slice(-1)[0].value}</p>     
+                        <p>Current Median Home Price: ${newzvhiValue}</p>     
                     </CardText>
-                    <Button onClick={handleClick}>Details</Button>
-                    <Button onClick={unpin}>Unpin</Button>
+                    <Button className="" onClick={handleClick}>Details</Button>
                 </CardBody>
             </Card>
         </>

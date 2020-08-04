@@ -27,57 +27,57 @@ export default function Feed({oneZip, refreshZip}) {
     }
     return (
         <>
-        <Button outline color="info" onClick={toggle} style={{ marginBottom: '1rem' }}>Comments</Button>
-        <Collapse isOpen={isOpen}>
-        <div className="messages-container">
-        {
-            oneZip.messageList.map(message => {
-                return (
-                    <div className="message-container">
-                        <div className="message-category">{message.category.name}</div>
-                        <div className="message-content">{message.content}</div>
-                        <Button onClick={(e) => {
-                            e.preventDefault()
-                            removeMessage(message.id)
-                            refreshZip()
-                        }}>X</Button>
-                    </div>
-                )
-            })
-        }
+        <div className="feed-container">
+            <h3>Comments ({oneZip.messageList.length})</h3>
+            <div className="messages-container">
+            {
+                oneZip.messageList.map(message => {
+                    return (
+                        <div className="message-container">
+                            <div className="message-category">{message.category.name}</div>
+                    <div className="message-content">{message.content}</div>
+                            <Button className="deletemsg-btn" onClick={(e) => {
+                                e.preventDefault()
+                                removeMessage(message.id)
+                                refreshZip()
+                            }}>X</Button>
+                        </div>
+                    )
+                })
+            }
+            </div>
+            <div className="messageSubmit-container">
+                <Input
+                    type="select"
+                    onChange ={(e) => setCategoryId(parseInt(e.target.value))}
+                    className="category-input"
+                >
+                    <option value="3">Category...</option>
+                    <option value="1">Buying</option>
+                    <option value="2">Selling</option>
+                    <option value="3">Other</option>
+                </Input>
+                <Input
+                    type="text"
+                    id="newMessage"
+                    placeholder="Enter comment here"
+                    className="content-input"
+                    onChange={(e) => setContent(e.target.value)}
+                >
+                </Input>
+                <Button
+                    type="submit"
+                    size="md"
+                    onClick={(e) => {
+                        e.preventDefault()
+                        saveMessage()
+                        refreshZip()
+                    }}
+                >
+                Send
+                </Button>
+            </div>
         </div>
-        <div className="messageSubmit-container">
-            <Input
-                type="select"
-                onChange ={(e) => setCategoryId(parseInt(e.target.value))}
-                className="category-input"
-            >
-                <option value="3">Category...</option>
-                <option value="1">Buying</option>
-                <option value="2">Selling</option>
-                <option value="3">Other</option>
-            </Input>
-            <Input
-                type="text"
-                id="newMessage"
-                placeholder="Enter comment here"
-                className="content-input"
-                onChange={(e) => setContent(e.target.value)}
-            >
-            </Input>
-            <Button
-                type="submit"
-                size="md"
-                onClick={(e) => {
-                    e.preventDefault()
-                    saveMessage()
-                    refreshZip()
-                }}
-            >
-            Send
-            </Button>
-        </div>
-        </Collapse>
         </>
     )
 }

@@ -23,8 +23,8 @@ export default function Dashboard() {
 
     return (
         <main className="dashboard-container">
-            <div className="title-container">
-                <h1 style={{color: "white"}}>Pinned Markets</h1>
+            <div className="title-container" style={{marginTop: "1em", marginBottom: "2em"}}>
+                <h1>Pinned Markets</h1>
             </div>
             <div className="secondmain-container">
                 <div className="pinnedMarkets-container">

@@ -43,6 +43,9 @@ export default function ZipDetails() {
                 if(currentUser.userPinnedMarkets.find(pm => pm.zipCodeId === oneZip.id)) {
                     setIsPinned(true)
                 }
+                else {
+                    setIsPinned(false)
+                }
             })
     },[oneZip])
     
@@ -52,10 +55,12 @@ export default function ZipDetails() {
     }
     
     const handlePin = () => {
-        setIsPinned(!isPinned)
+        
         if(isPinned) {
+            debugger
             const foundPM = currentUser.userPinnedMarkets.find(pm => pm.zipCodeId === oneZip.id)
             deletePinnedMarket(foundPM.id)
+            setIsPinned(!isPinned)
         }
         else {
             const newPM = {
@@ -63,6 +68,7 @@ export default function ZipDetails() {
                 ZipCodeId: oneZip.id
             }
             addPinnedMarket(newPM)
+            setIsPinned(!isPinned)
         }
     }
 
@@ -87,7 +93,7 @@ export default function ZipDetails() {
         <>
         <main className="maindetails-container">
             <div className="title-container">
-                <h1>{oneZip.zipCode} {oneZip.city}, {oneZip.state.stateAbbr}</h1>
+                <h1><span style={{color: "#3B5FB5", fontWeight: "bold"}}>{oneZip.zipCode}</span> {oneZip.city}, {oneZip.state.stateAbbr}</h1>
                 {pinnedStatus()}
             </div>
             <div className="graphs-container">

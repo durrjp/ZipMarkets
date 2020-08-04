@@ -40,3 +40,13 @@
     margin-right: auto;
 }
 
+.unpinbtn-container {
+    text-align: right;
+}
+
+.unpinbtn {
+    background-color: rgb(160, 36, 36) !important;
+    width: 4em !important;
+    font-size: 12px !important;
+    padding: .2em !important;
+}
