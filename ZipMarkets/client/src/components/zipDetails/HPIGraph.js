@@ -78,6 +78,41 @@ export default function HPIGraph({oneZip}) {
         const reverseUsArray = newUSArray.reverse()
         const yearUSPercChange = (((reverseUsArray[0].average - reverseUsArray[1].average) / reverseUsArray[1].average)*100).toFixed(2)
         const fiveUSYearPercChange = (((reverseUsArray[0].average - reverseUsArray[4].average) / reverseUsArray[4].average)*100).toFixed(2)
+        let ypcColor = ""
+        if (yearPercChange > 0) {
+            ypcColor = "rgb(114, 207, 114)"
+        } 
+        else {
+            ypcColor = "rgb(238, 49, 49)"
+    
+        }
+
+        let fpcColor = ""
+        if (yearPercChange > 0) {
+            fpcColor = "rgb(114, 207, 114)"
+        } 
+        else {
+            fpcColor = "rgb(238, 49, 49)"
+    
+        }
+
+        let ypcUSColor = ""
+        if (yearPercChange > 0) {
+            ypcUSColor = "rgb(114, 207, 114)"
+        } 
+        else {
+            ypcUSColor = "rgb(238, 49, 49)"
+    
+        }
+
+        let fpcUSColor = ""
+        if (yearPercChange > 0) {
+            fpcUSColor = "rgb(114, 207, 114)"
+        } 
+        else {
+            fpcUSColor = "rgb(238, 49, 49)"
+    
+        }
     
         return (
             <>
@@ -123,7 +158,7 @@ export default function HPIGraph({oneZip}) {
                 }}
     
             />
-            <Table style={{marginTop:"1em", color: "white", border:"5px solid", borderColor: "rgb(0,0,0,.5)"}}>
+            <Table style={{marginTop:"1em", color: "white"}}>
                 <thead>
                     <tr>
                         <th></th>
@@ -134,13 +169,13 @@ export default function HPIGraph({oneZip}) {
                 <tbody>
                     <tr>
                         <th>{oneZip.zipCode}</th>
-                        <td>{yearPercChange}%</td>
-                        <td>{fiveYearPercChange}%</td>
+                        <td style={{color: ypcColor}}>{yearPercChange}%</td>
+                        <td style={{color: fpcColor}}>{fiveYearPercChange}%</td>
                     </tr>
                     <tr>
                         <th>US Average</th>
-                        <td>{yearUSPercChange}%</td>
-                        <td>{fiveUSYearPercChange}%</td>
+                        <td style={{color: ypcUSColor}}>{yearUSPercChange}%</td>
+                        <td style={{color: fpcUSColor}}>{fiveUSYearPercChange}%</td>
                     </tr>
                 </tbody>
             </Table>

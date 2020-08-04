@@ -27,8 +27,8 @@ export default function Feed({oneZip, refreshZip}) {
     }
     return (
         <>
+        <h3>Comments ({oneZip.messageList.length})</h3>
         <div className="feed-container">
-            <h3>Comments ({oneZip.messageList.length})</h3>
             <div className="messages-container">
             {
                 oneZip.messageList.map(message => {

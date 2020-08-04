@@ -107,9 +107,7 @@ export default function ZipDetails() {
             <div className="COL-container">
                 <COLTable oneZip={oneZip} />
             </div>
-            <div className="feed-container">
-                <Feed refreshZip={refreshZip} oneZip={oneZip} />
-            </div>
+            <Feed refreshZip={refreshZip} oneZip={oneZip} />
         </main>
         </>
     )

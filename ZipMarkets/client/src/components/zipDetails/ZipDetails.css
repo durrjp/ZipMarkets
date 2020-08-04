@@ -14,7 +14,10 @@
 .oneGraph {
     width: 45%;
     height: 60%;
-    margin: 1em
+    margin: 1em;
+    border: 5px solid;
+    border-color: rgb(0,0,0,.5);
+    padding-top: .2em
 }
 
 .pin-container {
