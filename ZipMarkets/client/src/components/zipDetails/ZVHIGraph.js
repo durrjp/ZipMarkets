@@ -12,22 +12,50 @@ export default function ZVHIGraph({oneZip}) {
         getAvgZVHIs()
     },[])
 
+    // const usYearArray = avgZVHIs.map(year => {
+    //     const splitDate = year.date.split("")
+    //     return `${splitDate[0]}${splitDate[1]}${splitDate[2]}${splitDate[3]}`
+    // })
+
     const usYearArray = avgZVHIs.map(year => {
-        const splitDate = year.date.split("")
-        return `${splitDate[0]}${splitDate[1]}${splitDate[2]}${splitDate[3]}`
+        return year.date
     })
     
-    const yearArray = oneZip.zvhiList.map(zvhi => {
-        const splitDate = zvhi.date.split("")
+    const missedYearsArray = usYearArray.map(year => {
+        const yearObj = {"year": year}
+        if(oneZip.zvhiList.find(zvhi => zvhi.date === year)) {
+            const foundUsAvg = avgZVHIs.find(avg => avg.date === year)
+            const foundzvhi = oneZip.zvhiList.find(zvhi => zvhi.date === year)
+            yearObj["avg"] = foundUsAvg.average
+            yearObj["zip"] = foundzvhi.value
+        }
+        else {
+            const foundUsAvg = avgZVHIs.find(avg => avg.date === year)
+            yearObj["avg"] = foundUsAvg.average
+            yearObj["zip"] = null
+        }
+        return yearObj
+    })
+
+    const shortYearArray = usYearArray.map(year => {
+        const splitDate = year.split("")
         return `${splitDate[0]}${splitDate[1]}${splitDate[2]}${splitDate[3]}`
-    } )
-    const usValueArray = avgZVHIs.map(zvhi => zvhi.average.toFixed())
-    const valueArray = oneZip.zvhiList.map(zvhi => zvhi.value)
+    })  
+
+    const zipValues = missedYearsArray.map(year => {
+        return year.zip
+    })
+
+    const usValues = missedYearsArray.map(year => {
+        return year.avg
+    })
+    
+    
     const data ={
-        labels: usYearArray,
+        labels: shortYearArray,
         datasets: [
             {
-                data: valueArray,
+                data: zipValues,
                 label: oneZip.zipCode,
                 fill: false,
                 lineTension: 0.1,
@@ -43,7 +71,7 @@ export default function ZVHIGraph({oneZip}) {
                 pointHitRadius: 10
             },
             {
-                data: usValueArray,
+                data: usValues,
                 fill: false,
                 label: "US Average",
                 lineTension: 0.1,
@@ -87,7 +115,7 @@ export default function ZVHIGraph({oneZip}) {
     }
 
     let fpcColor = ""
-    if (yearPercChange > 0) {
+    if (fiveYearPercChange > 0) {
         fpcColor = "rgb(114, 207, 114)"
     } 
     else {
@@ -96,7 +124,7 @@ export default function ZVHIGraph({oneZip}) {
     }
 
     let ypcUSColor = ""
-    if (yearPercChange > 0) {
+    if (yearUSPercChange > 0) {
         ypcUSColor = "rgb(114, 207, 114)"
     } 
     else {
@@ -105,7 +133,7 @@ export default function ZVHIGraph({oneZip}) {
     }
 
     let fpcUSColor = ""
-    if (yearPercChange > 0) {
+    if (fiveUSYearPercChange > 0) {
         fpcUSColor = "rgb(114, 207, 114)"
     } 
     else {
@@ -164,8 +192,8 @@ export default function ZVHIGraph({oneZip}) {
                 <thead>
                     <tr>
                         <th></th>
-                        <th>% Change - 1 Year</th>
-                        <th>% Change - 5 Years</th>
+                        <th>% Change: 1 Year</th>
+                        <th>% Change: 5 Years</th>
                     </tr>
                 </thead>
                 <tbody>

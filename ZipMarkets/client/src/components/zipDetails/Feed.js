@@ -25,6 +25,7 @@ export default function Feed({oneZip, refreshZip}) {
     const removeMessage = (id) => {
         deleteMessage(id)
     }
+    
     return (
         <>
         <h3>Comments ({oneZip.messageList.length})</h3>
@@ -34,8 +35,11 @@ export default function Feed({oneZip, refreshZip}) {
                 oneZip.messageList.map(message => {
                     return (
                         <div className="message-container">
-                            <div className="message-category">{message.category.name}</div>
-                    <div className="message-content">{message.content}</div>
+                            <div>
+                                <div></div>
+                                <div className="message-category">{message.category.name}</div>
+                            </div>
+                            <div className="message-content">{message.content}</div>
                             <Button className="deletemsg-btn" onClick={(e) => {
                                 e.preventDefault()
                                 removeMessage(message.id)
@@ -74,7 +78,7 @@ export default function Feed({oneZip, refreshZip}) {
                         refreshZip()
                     }}
                 >
-                Send
+                Post
                 </Button>
             </div>
         </div>
