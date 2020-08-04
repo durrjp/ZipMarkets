@@ -43,7 +43,7 @@ export default function PinView({pinView, currentUser, refresh, setPinView}) {
                         <p>{pinView.zipCode.county}</p>
                         <p>Current Median Home Price: ${newzvhiValue}</p>     
                     </CardText>
-                    <Button className="" onClick={handleClick}>Details</Button>
+                    <Button className="details-btn" onClick={handleClick}>Details</Button>
                 </CardBody>
             </Card>
         </>

@@ -1,11 +1,10 @@
 import React, { useEffect, useContext } from "react"
 import {Line} from "react-chartjs-2"
 import { HPIContext } from "../../providers/HPIProvider"
-import { Table } from "reactstrap"
+import { Table} from "reactstrap"
 
 export default function HPIGraph({oneZip}) {
     const {avgHPIs, getAvgHPIs} = useContext(HPIContext)
-
 
     useEffect(() => {
         getAvgHPIs()
@@ -14,11 +13,7 @@ export default function HPIGraph({oneZip}) {
     const usYearArray = avgHPIs.map(hpi => {
         return hpi.year
     })
-    const usValueArray = avgHPIs.map(hpi => {
-        return hpi.average
-    })
-
-    const valueArray = oneZip.hpiList.map(hpi => hpi.hpi)
+ 
 
     const missedYearsArray = usYearArray.map(year => {
         const yearObj = {"year": year}
