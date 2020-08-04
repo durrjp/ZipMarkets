@@ -1,29 +1,30 @@
-import React, { useEffect, useState, useContext } from "react"
+import React, { useEffect, useContext } from "react"
 import {Line} from "react-chartjs-2"
-import { ZipContext } from "../../providers/ZipProvider"
+import { HPIContext } from "../../providers/HPIProvider"
 
 export default function HPIGraph({oneZip}) {
-    const {avgHPIs, getAvgHPIs} = useContext(ZipContext)
+    const {avgHPIs, getAvgHPIs} = useContext(HPIContext)
 
 
     useEffect(() => {
-        getAvgHPIs().then(res => {
-            debugger
-            res.map(r => {
-                return r.HPI
-            })
-        })
+        getAvgHPIs()
     },[])
+    const usYearArray = avgHPIs.map(hpi => {
+        return hpi.year
+    })
+    const usValueArray = avgHPIs.map(hpi => {
+        return hpi.average
+    })
 
     const yearArray = oneZip.hpiList.map(hpi => hpi.year)
     const valueArray = oneZip.hpiList.map(hpi => hpi.hpi)
     const data ={
-        labels: yearArray,
+        labels: usYearArray,
         datasets: [
             {
-                label: "Home Price Index",
+                label: oneZip.zipCode,
                 data: valueArray,
-                fill: true,
+                fill: false,
                 lineTension: 0.1,
                 backgroundColor: 'rgba(255,187,99,0.4)',
                 borderColor: '#FFBB63',
@@ -34,10 +35,23 @@ export default function HPIGraph({oneZip}) {
                 pointBorderColor: '#FFBB63',
                 pointBackgroundColor: '#fff',
                 pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: '#FFBB63',
-                pointHoverBorderColor: 'rgba(255,187,99,1)',
-                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10
+            },
+            {
+                data: usValueArray,
+                fill: false,
+                label: "US Average",
+                lineTension: 0.1,
+                backgroundColor: 'rgba(82,113,255,0.4)',
+                borderColor: 'rgba(82,113,255,1)',
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: 'rgba(82,113,255,1)',
+                pointBackgroundColor: '#fff',
+                pointBorderWidth: 1,
                 pointRadius: 1,
                 pointHitRadius: 10
             }
@@ -45,7 +59,11 @@ export default function HPIGraph({oneZip}) {
     }
     
     if(oneZip.hpiList.length === 0) {
-        return null
+        return (
+            <div>
+                <h4>Insufficient data...</h4>
+            </div>
+        )
     }
 
     if(oneZip.hpiList.length > 0) {
@@ -53,11 +71,6 @@ export default function HPIGraph({oneZip}) {
         const reverseArray = newArray.reverse()
         const yearPercChange = (((reverseArray[0].hpi - reverseArray[1].hpi) / reverseArray[1].hpi)*100).toFixed(2)
         const fiveYearPercChange = (((reverseArray[0].hpi - reverseArray[4].hpi) / reverseArray[4].hpi)*100).toFixed(2)
-        let tenYearPercChange = "not enough data"
-        if(oneZip.hpiList.length >= 10)
-        {
-            tenYearPercChange = (((reverseArray[0].hpi - reverseArray[9].hpi) / reverseArray[9].hpi)*100).toFixed(2)
-        }
     
         return (
             <>
@@ -86,7 +99,6 @@ export default function HPIGraph({oneZip}) {
             <div>
                 <div>Change 1 Year: {yearPercChange}%</div>
                 <div>Change 5 Years: {fiveYearPercChange}%</div>
-                <div>Change 10 Years: {tenYearPercChange}%</div>
             </div>
             </>
         )

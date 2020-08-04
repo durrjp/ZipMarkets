@@ -54,18 +54,6 @@ namespace ZipMarkets.Controllers
             return Ok(zip);
         }
 
-        [HttpGet("/getavghpi")]
-        public IActionResult GetAvgHPIs()
-        {
-            return Ok(_zipRepository.GetHPIAvgs());
-        }
-
-        [HttpGet("/getavgzvhi")]
-        public IActionResult GetAvgZVHIs()
-        {
-            return Ok(_zipRepository.GetZVHIAvgs());
-        }
-
         private User GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;

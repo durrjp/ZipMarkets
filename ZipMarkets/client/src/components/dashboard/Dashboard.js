@@ -15,9 +15,17 @@ export default function Dashboard() {
         getUser().then(setCurrentUser)
     },[])
 
+    const refreshUser = () => {
+        getUser().then(setCurrentUser)
+    }
+
+    
+
     return (
         <main className="dashboard-container">
-            <h1 style={{color: "white"}}>Pinned Markets</h1>
+            <div className="title-container">
+                <h1 style={{color: "white"}}>Pinned Markets</h1>
+            </div>
             <div className="secondmain-container">
                 <div className="pinnedMarkets-container">
                     {
@@ -27,7 +35,7 @@ export default function Dashboard() {
                     }
                 </div>
                 <div className="pinView-container">
-                    <PinView pinView={pinView} />
+                    <PinView setPinView={setPinView} refresh={refreshUser} currentUser={currentUser} pinView={pinView} />
                 </div>
             </div>
         </main>

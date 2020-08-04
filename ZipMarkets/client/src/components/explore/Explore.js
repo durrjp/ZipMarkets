@@ -91,7 +91,6 @@ export default function Explore() {
                 <h2>{chosenZip.zipCode}</h2>
                 <p>{chosenZip.city}, {chosenZip.state.stateName}</p>
                 <p>{chosenZip.county}</p>
-                <p>ZVHI: {chosenZip.zvhiList.slice(-1)[0].value}</p>
                 <Button onClick={handleClick}>Details</Button>
             </Popup>
         ) : null

@@ -10,7 +10,6 @@ import NotPinned from "../../images/NotPinned.png"
 import { PinnedMarketContext } from "../../providers/PinnedMarketProvider"
 import { UserContext } from "../../providers/UserProvider"
 import Feed from "./Feed"
-import { Card } from "reactstrap"
 
 export default function ZipDetails() {
     const {getZipById} = useContext(ZipContext)
@@ -36,17 +35,17 @@ export default function ZipDetails() {
     useEffect(() => {
         getUser().then(setCurrentUser)
     },[isPinned])
-    
+ 
+
     useEffect(() => {
-        getZipById(parsedId).then(setOneZip)
-    },[])
-    
-    useEffect(() => {
-        if(currentUser.userPinnedMarkets.find(pm => pm.zipCodeId === oneZip.id))
-        {
-            setIsPinned(true)
-        }
+        getZipById(parsedId).then((res) => {
+            setOneZip(res)}).then(() => {
+                if(currentUser.userPinnedMarkets.find(pm => pm.zipCodeId === oneZip.id)) {
+                    setIsPinned(true)
+                }
+            })
     },[oneZip])
+    
 
     const refreshZip = () => {
         getZipById(parsedId).then(setOneZip)
