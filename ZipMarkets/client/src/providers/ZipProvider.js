@@ -31,13 +31,9 @@ export default function ZipProvider(props) {
     )
 
     const getZipByZipCode = (zipCode) => (
-      getToken().then((token) => 
       fetch(`/api/zip/getbyzip/${zipCode}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then((res) => res.json()))
+        method: "GET"
+      }).then((res) => res.json())
     )
 
     const getZipsByPrice = (priceString) => (

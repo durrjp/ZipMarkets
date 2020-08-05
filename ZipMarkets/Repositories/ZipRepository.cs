@@ -35,7 +35,7 @@ namespace ZipMarkets.Repositories
                            .Select(v => new
                            {
                                ZVHIGroup = v,
-                               ZVHIValue = v.ZVHIList.Where(v => min <= v.Value && max >= v.Value && v.Date.Year == 2020)
+                               ZVHIValue = v.ZVHIList.Where(v => min <= v.Value && max >= v.Value && v.Date.Year == DateTime.Now.Year)
                            }).AsEnumerable().Select(g => g.ZVHIGroup)
                            .Where(z => z.ZVHIList != null)
                            .ToList();

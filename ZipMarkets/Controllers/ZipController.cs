@@ -53,6 +53,7 @@ namespace ZipMarkets.Controllers
             return Ok(zip);
         }
 
+        [AllowAnonymous]
         [HttpGet("getbyzip/{zipCode}")]
         public IActionResult GetByZip(int zipCode)
         {
