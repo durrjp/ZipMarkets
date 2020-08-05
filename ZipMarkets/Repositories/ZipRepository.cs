@@ -31,13 +31,13 @@ namespace ZipMarkets.Repositories
         {
 
             return _context.AllZips
-                           /*.Include(z => z.State)*/
-                           /*.Select(v => new 
-                           { 
+                           .Include(z => z.State)
+                           .Select(v => new
+                           {
                                ZVHIGroup = v,
-                               ZVHIValue = v.ZVHIList.Where(v => min <= v.Value && max >= v.Value)
-                           }).AsEnumerable().Select(g => g.ZVHIGroup)*/
-                           .IncludeFilter(z => z.ZVHIList.Where(v => min <= v.Value && max >= v.Value))
+                               ZVHIValue = v.ZVHIList.Where(v => min <= v.Value && max >= v.Value && v.Date.Year == 2020)
+                           }).AsEnumerable().Select(g => g.ZVHIGroup)
+                           .Where(z => z.ZVHIList != null)
                            .ToList();
         }
 

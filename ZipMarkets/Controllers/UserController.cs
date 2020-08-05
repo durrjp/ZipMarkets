@@ -45,6 +45,7 @@ namespace ZipMarkets.Controllers
         {
             user.CreateDateTime = DateTime.Now;
             user.UserTypeId = 2;
+            user.FilterByPrice = false;
             _userRepository.Add(user);
             return CreatedAtAction(
                 nameof(GetUser),

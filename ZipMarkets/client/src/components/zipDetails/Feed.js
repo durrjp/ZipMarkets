@@ -17,11 +17,11 @@ export default function Feed({oneZip, refreshZip}) {
             userId: currentUser.id,
             content
         }
-        addMessage(newMessage)
+        addMessage(newMessage).then(() => refreshZip())
     }
 
     const removeMessage = (id) => {
-        deleteMessage(id)
+        deleteMessage(id).then(() => refreshZip())
     }
     
     return (
@@ -39,7 +39,7 @@ export default function Feed({oneZip, refreshZip}) {
                             <div className="message-content">{message.content}</div>
                             <Button className="deletemsg-btn" onClick={(e) => {
                                 e.preventDefault()
-                                removeMessage(message.id).then(() => refreshZip())
+                                removeMessage(message.id)
                                 
                             }}>X</Button>
                         </div>
@@ -76,7 +76,6 @@ export default function Feed({oneZip, refreshZip}) {
                     onClick={(e) => {
                         e.preventDefault()
                         saveMessage()
-                        refreshZip()
                     }}
                 >
                 Post

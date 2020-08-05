@@ -3,3 +3,9 @@
     width: 100vw;
     height: 100vh
 }
+
+.checkbox-bigger {
+    transform: scale(2);
+    -webkit-transform: scale(2);
+    margin-left: 3em;
+}
