@@ -69,6 +69,8 @@ namespace ZipMarkets
             }
 
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseRouting();
             app.UseAuthentication();
