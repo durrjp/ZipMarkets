@@ -31,6 +31,16 @@ namespace ZipMarkets.Controllers
             return Ok(_zipRepository.GetAll());
         }
 
+        [HttpGet("getbyprice/{prices}")]
+        public IActionResult GetByPrice(string prices)
+        {
+            int[] priceArray = prices.Split(",").Select(Int32.Parse).ToArray();
+            int minPrice = priceArray.First();
+            int maxPrice = priceArray.Last();
+            return Ok(_zipRepository.GetByPrice(minPrice, maxPrice));
+        }
+
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {

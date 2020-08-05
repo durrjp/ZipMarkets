@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Z.EntityFramework.Plus;
 using ZipMarkets.Data;
 using ZipMarkets.Models;
 using ZipMarkets.Models.ViewModels;
@@ -24,6 +25,20 @@ namespace ZipMarkets.Repositories
                             .Include(z => z.State)
                             .Where(z => z.Latitude != null && z.Longitude != null)
                             .ToList();
+        }
+
+        public IEnumerable<Zip> GetByPrice(int min, int max)
+        {
+
+            return _context.AllZips
+                           /*.Include(z => z.State)*/
+                           /*.Select(v => new 
+                           { 
+                               ZVHIGroup = v,
+                               ZVHIValue = v.ZVHIList.Where(v => min <= v.Value && max >= v.Value)
+                           }).AsEnumerable().Select(g => g.ZVHIGroup)*/
+                           .IncludeFilter(z => z.ZVHIList.Where(v => min <= v.Value && max >= v.Value))
+                           .ToList();
         }
 
         public Zip GetById(int id)

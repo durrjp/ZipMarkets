@@ -5,6 +5,7 @@ export const ZipContext = createContext()
 
 export default function ZipProvider(props) {
     const [allZips, setAllZips] = useState([])
+    const [zipsByPrice, setZipsByPrice] = useState([])
     const {getToken} = useContext(UserContext)
     const [zipReady, setZipReady] = useState(false)
     
@@ -39,8 +40,19 @@ export default function ZipProvider(props) {
       }).then((res) => res.json()))
     )
 
+    const getZipsByPrice = (priceString) => (
+      getToken().then((token) => 
+      fetch(`/api/zip/getbyprice/${priceString}`, {
+        method: "GET",
+        headers: {
+          Authorization:  `Bearer ${token}`
+        }
+      }).then((res) => res.json())
+        .then(setZipsByPrice))
+    )
+
     return (
-        <ZipContext.Provider value={{getAllZips, allZips, getZipById, getZipByZipCode, zipReady, setZipReady}}>
+        <ZipContext.Provider value={{getAllZips, allZips, getZipById, getZipByZipCode, zipReady, setZipReady, getZipsByPrice, zipsByPrice}}>
             {props.children}
         </ZipContext.Provider>
         );

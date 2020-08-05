@@ -1,14 +1,12 @@
 import React, { useContext, useState } from "react"
 import { MessageContext } from "../../providers/MessageProvider"
-import { Input, Button, Collapse } from "reactstrap";
+import { Input, Button} from "reactstrap";
 import "./Feed.css"
 
 export default function Feed({oneZip, refreshZip}) {
     const {addMessage, deleteMessage} = useContext(MessageContext)
     const [content, setContent] = useState();
     const [categoryId, setCategoryId] = useState(3)
-    const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
 
     const currentUser = JSON.parse(sessionStorage.getItem("user"));
 
@@ -36,14 +34,13 @@ export default function Feed({oneZip, refreshZip}) {
                     return (
                         <div className="message-container">
                             <div>
-                                <div></div>
                                 <div className="message-category">{message.category.name}</div>
                             </div>
                             <div className="message-content">{message.content}</div>
                             <Button className="deletemsg-btn" onClick={(e) => {
                                 e.preventDefault()
-                                removeMessage(message.id)
-                                refreshZip()
+                                removeMessage(message.id).then(() => refreshZip())
+                                
                             }}>X</Button>
                         </div>
                     )
@@ -53,6 +50,7 @@ export default function Feed({oneZip, refreshZip}) {
             <div className="messageSubmit-container">
                 <Input
                     type="select"
+                    style={{backgroundColor: "#E6E8F9", border:"none"}}
                     onChange ={(e) => setCategoryId(parseInt(e.target.value))}
                     className="category-input"
                 >
@@ -65,12 +63,15 @@ export default function Feed({oneZip, refreshZip}) {
                     type="text"
                     id="newMessage"
                     placeholder="Enter comment here"
+                    style={{backgroundColor: "#E6E8F9", border:"none", marginLeft: "1em"}}
                     className="content-input"
                     onChange={(e) => setContent(e.target.value)}
                 >
                 </Input>
                 <Button
                     type="submit"
+                    style={{backgroundColor: "rgb(130, 214, 130)", color:"black", marginLeft: "1em"}}
+                    className="messagebtn"
                     size="md"
                     onClick={(e) => {
                         e.preventDefault()

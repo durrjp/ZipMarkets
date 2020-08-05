@@ -17,13 +17,12 @@ const markerStyle = {
   };
 
 export default function Explore() {
-    const [currentUser, setCurrentUser] = useState()
+    const {allZips, getAllZips, getZipById, getZipByZipCode, getZipsByPrice, zipsByPrice} = useContext(ZipContext)
     const {getUser} = useContext(UserContext)
-    const {getZipByZipCode} = useContext(ZipContext)
+    const [currentUser, setCurrentUser] = useState()
     const mapRef= useRef();
     const clusterRef = useRef();
     const history = useHistory();
-    const {allZips, getAllZips, getZipById} = useContext(ZipContext)
     const [chosenZip, setChosenZip] = useState(null)
     const [zipSearched, setZipSearched] = useState()
     
@@ -31,10 +30,17 @@ export default function Explore() {
         getAllZips()
         // eslint-disable-next-line 
     },[])
+
+    useEffect(() => {
+        
+        // eslint-disable-next-line 
+    },[currentUser])
+    debugger
     
     useEffect(() => {
         getUser().then((cu) => {
             setCurrentUser(cu)
+            getZipsByPrice(`${cu.minHomePrice},${cu.maxHomePrice}`)
             setViewPort({
                 latitude: cu.homeZip.latitude,
                 longitude: cu.homeZip.longitude,
@@ -49,6 +55,10 @@ export default function Explore() {
         longitude: 0,
         zoom: 5
     })
+
+    const filterByPrice = () => {
+        
+    }
     
 
 

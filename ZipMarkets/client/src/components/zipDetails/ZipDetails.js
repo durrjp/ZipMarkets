@@ -57,14 +57,7 @@ export default function ZipDetails() {
     },[pinReady, oneZip])
         
     const refreshZip = () => {
-        getZipById(parsedId).then(setOneZip).then(() => {
-            if(currentUser.userPinnedMarkets.find(pm => pm.zipCodeId === oneZip.id)) {
-                setIsPinned(true)
-            }
-            else {
-                setIsPinned(false)
-            }
-        })
+        getZipById(parsedId).then(setOneZip)
     }
     
     const handlePin = () => {
