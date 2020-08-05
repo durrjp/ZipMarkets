@@ -131,7 +131,7 @@ export default function Explore() {
     }
 
     const filterMapFunc = () => {
-        if(currentUser && zipsByPrice && allZips) {
+        if(currentUser && zipsByPrice.length !== 0 && allZips.length !== 0) {
         if(currentUser.filterByPrice === true) {
             return (
                 zipsByPrice.map(point => (
