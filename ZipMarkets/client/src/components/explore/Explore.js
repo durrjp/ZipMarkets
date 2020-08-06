@@ -1,5 +1,5 @@
 import React, {useState, useRef, useContext, useEffect} from "react"
-import MapGL, { Marker, Popup, NavigationControl } from '@urbica/react-map-gl';
+import MapGL, { Marker, Popup} from '@urbica/react-map-gl';
 import Cluster from '@urbica/react-map-gl-cluster';
 import { ZipContext } from "../../providers/ZipProvider";
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -62,7 +62,7 @@ export default function Explore() {
 
     const ClusterMarker = ({ longitude, latitude, pointCount }) => (
         <Marker longitude={longitude} latitude={latitude}>
-          <div style={{
+        <div style={{
                 background: '#FFBB63',
                 textAlign: 'center',
                 padding: 'auto',
@@ -70,11 +70,11 @@ export default function Explore() {
                 height: `${20 + (pointCount/1000) *20}px`,
                 borderRadius: '100px'
             }}
-          >
-              {pointCount}
-          </div>
+        >
+            {pointCount}
+        </div>
         </Marker>
-      );
+    );
 
     const handleClick = () => {
         history.push(`/zip/${chosenZip.id}`);
@@ -176,7 +176,7 @@ export default function Explore() {
             }
         } 
         else {
-            return null
+            return <span></span>
         }
     }
 
@@ -255,7 +255,7 @@ export default function Explore() {
                 nodeSize={64}
                 component= {ClusterMarker}
             >
-                {allZips !== undefined && zipsByPrice !== undefined ? filterMapFunc() : ""}
+                {filterMapFunc()}
             </Cluster>
                 {renderPopop()}
         </MapGL>
