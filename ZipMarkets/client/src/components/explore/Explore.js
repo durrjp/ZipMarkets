@@ -51,9 +51,9 @@ export default function Explore() {
     },[])
     
     const [viewport, setViewPort] = useState({
-        latitude: 0,
-        longitude: 0,
-        zoom: 5
+        latitude: 38.5,
+        longitude: -98,
+        zoom: 3.5,
     })
 
     
@@ -132,48 +132,51 @@ export default function Explore() {
 
     const filterMapFunc = () => {
         if(currentUser && zipsByPrice.length !== 0 && allZips.length !== 0) {
-        if(currentUser.filterByPrice === true) {
-            return (
-                zipsByPrice.map(point => (
-                    <Marker
-                        key={point.id}
-                        longitude={point.longitude}
-                        latitude={point.latitude}
-                    >
-                        <Button
-                            style={markerStyle}
-                            onClick={(e) => {
-                                e.preventDefault()
-                                getZipById(point.id).then(setChosenZip)
-                            }}  
+            if(currentUser.filterByPrice === true) {
+                return (
+                    zipsByPrice.map(point => (
+                        <Marker
+                            key={point.id}
+                            longitude={point.longitude}
+                            latitude={point.latitude}
                         >
-                            {point.zipCode}
-                        </Button>
-                    </Marker>
-                ))
-            )
-        }
+                            <Button
+                                style={markerStyle}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    getZipById(point.id).then(setChosenZip)
+                                }}  
+                            >
+                                {point.zipCode}
+                            </Button>
+                        </Marker>
+                    ))
+                )
+            }
+            else {
+                return (
+                    allZips.map(point => (
+                        <Marker
+                            key={point.id}
+                            longitude={point.longitude}
+                            latitude={point.latitude}
+                        >
+                            <Button
+                                style={markerStyle}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    getZipById(point.id).then(setChosenZip)
+                                }}  
+                            >
+                                {point.zipCode}
+                            </Button>
+                        </Marker>
+                    ))
+                )
+            }
+        } 
         else {
-            return (
-                allZips.map(point => (
-                    <Marker
-                        key={point.id}
-                        longitude={point.longitude}
-                        latitude={point.latitude}
-                    >
-                        <Button
-                            style={markerStyle}
-                            onClick={(e) => {
-                                e.preventDefault()
-                                getZipById(point.id).then(setChosenZip)
-                            }}  
-                        >
-                            {point.zipCode}
-                        </Button>
-                    </Marker>
-                ))
-            )
-        }
+            return null
         }
     }
 
@@ -252,7 +255,7 @@ export default function Explore() {
                 nodeSize={64}
                 component= {ClusterMarker}
             >
-                {filterMapFunc()}
+                {allZips !== undefined && zipsByPrice !== undefined ? filterMapFunc() : ""}
             </Cluster>
                 {renderPopop()}
         </MapGL>
