@@ -1,3 +1,3 @@
 # ZipMarkets
 
-zipmarkets.azurewebsites.net[ZipMarkets](https://zipmarkets.azurewebsites.net/)
+[zipmarkets.azurewebsites.net](https://zipmarkets.azurewebsites.net/)
