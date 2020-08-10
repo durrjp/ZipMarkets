@@ -9,3 +9,25 @@ Zip Markets is a housing market tracking app powered by data from the Federal Ho
 
 ## Technologies
 ### Front End
+* HTML, CSS, Javascript
+* React
+* ReactDOM
+* React-Router-DOM
+* Reactstrap
+* Bootstrap
+* React-ChartJS-2
+* Mapbox API
+* urbica/react-map-gl
+* urbica/react-map-gl-cluster
+* Canva (logo and icons)
+### Back End
+* C#
+* ASP.Net Web API
+* Entity Framework Core
+* SQL Server Database
+### Authentication
+* Firebase
+### Deployment
+* Azure SQL Database
+* Azure SQL Server
+* Azure App Service
