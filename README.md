@@ -31,3 +31,7 @@ Zip Markets is a housing market tracking app powered by data from the Federal Ho
 * Azure SQL Database
 * Azure SQL Server
 * Azure App Service
+
+## Contact
+Feel free to add me on LinkedIn https://www.linkedin.com/in/durrjp/
+or reach out with suggestions/questions via email durrjp1@gmail.com
