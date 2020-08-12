@@ -10,16 +10,18 @@ export default function MyProfile() {
     const [maxHomePrice, setHomePriceMax] = useState();
     const [displayName, setDisplayName] = useState();
     const [currentUser, setCurrentUser] = useState();
+    const [filterByPrice, setFilterByPrice] = useState();
     const {getZipByZipCode} = useContext(ZipContext)
     const {getUser, editUser} = useContext(UserContext)
 
     useEffect(() => {
         getUser().then((cu) => {
             setCurrentUser(cu)
-            setHomeZip(cu.homeZip.id)
+            setHomeZip(cu.homeZip)
             setDisplayName(cu.displayName)
             setHomePriceMin(cu.minHomePrice)
             setHomePriceMax(cu.maxHomePrice)
+            setFilterByPrice(cu.filterByPrice)
         })
     },[])
 
@@ -81,7 +83,8 @@ export default function MyProfile() {
       }
 
 
-    const saveSettings = () => {
+    const saveSettings = (e) => {
+        e.preventDefault()
         const user = {
             id: currentUser.id,
             userTypeId: currentUser.userTypeId,
@@ -91,12 +94,13 @@ export default function MyProfile() {
             createDateTime: currentUser.createDateTime,
             displayName,
             email: currentUser.email,
-            homeZipId: homeZip,
+            homeZipId: homeZip.id,
             minHomePrice,
-            maxHomePrice
+            maxHomePrice,
+            filterByPrice
           };
-          debugger
           editUser(user)
+          alert("Settings have been updated!")
     }
     return (
         <>
@@ -139,6 +143,20 @@ export default function MyProfile() {
                     defaultValue={maxHomePrice}
                     onChange={(e) => setHomePriceMax(parseInt(e.target.value))}
                     />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="filterByPrice">Filter Map By Price Interest</Label>
+                  <input
+                    id="filterByPrice"
+                    type="checkbox"
+                    className="checkbox-bigger"
+                    checked={filterByPrice}
+                    onChange={(e) => setFilterByPrice(!filterByPrice)}
+                    />
+                    <FormText>Filtering the map by price interest will display zip codes that currently have an average home price
+                      within your minimum and maximum prices above. Enabling filtering also GREATLY increases map processing speed allowing
+                      for easier exploring of zip codes across the country!
+                    </FormText>
                 </FormGroup>
                 <FormGroup>
                   <Button>Save</Button>

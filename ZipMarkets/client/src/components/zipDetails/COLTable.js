@@ -4,15 +4,17 @@ import { Table } from "reactstrap"
 export default function COLTable({oneZip}) {
     let cIcolor = ""
     if (oneZip.state.costIndex < 100) {
-        cIcolor = "green"
+        cIcolor = "rgb(114, 207, 114)"
     } 
     else {
-        cIcolor = "red"
+        cIcolor = "rgb(238, 49, 49)"
 
     }
 
     return (
-        <Table style={{backgroundColor: "white"}}>
+        <>
+        <h3 style={{marginBottom: "1em", marginTop: "2em"}}>Cost of Living</h3>
+        <Table style={{color: "white", border:"5px solid", borderColor: "rgb(0,0,0,.5)"}}>
             <thead>
                 <tr>
                     <th>State</th>
@@ -45,5 +47,6 @@ export default function COLTable({oneZip}) {
                 </tr>
             </tbody>
         </Table>
+        </>
     )
 }

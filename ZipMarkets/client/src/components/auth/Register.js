@@ -21,6 +21,7 @@ export default function Register() {
 
   const registerClick = (e) => {
     e.preventDefault();
+    debugger
     if (password && password !== confirmPassword) {
       alert("Passwords don't match.");
     } else {
@@ -29,7 +30,7 @@ export default function Register() {
         lastName,
         displayName,
         email,
-        homeZipId: homeZip,
+        homeZipId: homeZip.id,
         minHomePrice,
         maxHomePrice
       };

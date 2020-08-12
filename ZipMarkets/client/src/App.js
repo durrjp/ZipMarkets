@@ -7,6 +7,8 @@ import Header from './components/header/Header';
 import ZipProvider from './providers/ZipProvider';
 import PinnedMarketProvider from './providers/PinnedMarketProvider';
 import MessageProvider from './providers/MessageProvider';
+import HPiProvider from './providers/HPIProvider';
+import ZVHIProvider from './providers/ZVHIProvider';
 
 
 function App() {
@@ -16,8 +18,12 @@ function App() {
         <ZipProvider>
           <PinnedMarketProvider>
             <MessageProvider>
-              <Header />
-              <ApplicationViews />
+              <HPiProvider>
+                <ZVHIProvider>
+                  <Header />
+                  <ApplicationViews  />
+                </ZVHIProvider>
+              </HPiProvider>
             </MessageProvider>
           </PinnedMarketProvider>
         </ZipProvider>

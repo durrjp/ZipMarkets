@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -30,6 +31,16 @@ namespace ZipMarkets.Controllers
             return Ok(_zipRepository.GetAll());
         }
 
+        [HttpGet("getbyprice/{prices}")]
+        public IActionResult GetByPrice(string prices)
+        {
+            int[] priceArray = prices.Split(",").Select(Int32.Parse).ToArray();
+            int minPrice = priceArray.First();
+            int maxPrice = priceArray.Last();
+            return Ok(_zipRepository.GetByPrice(minPrice, maxPrice));
+        }
+
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -42,6 +53,7 @@ namespace ZipMarkets.Controllers
             return Ok(zip);
         }
 
+        [AllowAnonymous]
         [HttpGet("getbyzip/{zipCode}")]
         public IActionResult GetByZip(int zipCode)
         {

@@ -1,14 +1,57 @@
 .dashboard-container {
-    width: 100vw;
     height: 100vh;
+    width: 100%;
     background-color: #373A62;
+    display:flex;
+    flex-flow: column nowrap;
+}
+
+.secondmain-container {
+    display:flex;
+    flex-flow: column nowrap;
+    height: 100%;
+    width: 100%
 }
 
 .pinnedMarkets-container {
-    width:45%;
-    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    justify-content: center;
 }
 
 .pm-container {
-    margin: 1em
+    margin: .5em;
+}
+
+.pm-btn {
+    background-color: #E6E8F9 !important;
+    color: black !important
+}
+
+.pm-btn-selected {
+    background-color: #FFBB63 !important;
+    color: black !important
+}
+
+.pinView-container {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+}
+
+.unpinbtn-container {
+    text-align: right;
+}
+
+.unpinbtn {
+    background-color: rgb(160, 36, 36) !important;
+    width: 4em !important;
+    font-size: 12px !important;
+    padding: .2em !important;
+}
+
+.details-btn {
+    background-color: #6a6a6e !important;
 }

@@ -10,10 +10,10 @@ import NotPinned from "../../images/NotPinned.png"
 import { PinnedMarketContext } from "../../providers/PinnedMarketProvider"
 import { UserContext } from "../../providers/UserProvider"
 import Feed from "./Feed"
-import { Card } from "reactstrap"
+import { Spinner } from "reactstrap"
 
 export default function ZipDetails() {
-    const {getZipById} = useContext(ZipContext)
+    const {getZipById, setZipReady, zipReady} = useContext(ZipContext)
     const {addPinnedMarket, deletePinnedMarket} = useContext(PinnedMarketContext)
     const {getUser} = useContext(UserContext)
     const [currentUser, setCurrentUser] = useState({
@@ -28,35 +28,45 @@ export default function ZipDetails() {
     const id = useParams()
     const parsedId = parseInt(id.id)
     const [isPinned, setIsPinned] = useState(false)
+    const [pinReady, setPinReady] = useState(0)
+
 
     useEffect(() => {
-        getUser().then(setCurrentUser)
+        getUser().then(setCurrentUser).then(() => setPinReady(prev => prev + 1))
     },[])
 
     useEffect(() => {
         getUser().then(setCurrentUser)
     },[isPinned])
-    
-    useEffect(() => {
-        getZipById(parsedId).then(setOneZip)
-    },[])
-    
-    useEffect(() => {
-        if(currentUser.userPinnedMarkets.find(pm => pm.zipCodeId === oneZip.id))
-        {
-            setIsPinned(true)
-        }
-    },[oneZip])
 
+    
+    useEffect(() => {
+        getZipById(parsedId).then((res) => {
+            setOneZip(res)}).then(() => setZipReady(true)).then(() => setPinReady(prev => prev + 1))
+    },[])
+        
+    useEffect(() => {
+        if(pinReady === 2) {
+            if(currentUser.userPinnedMarkets.find(pm => pm.zipCodeId === oneZip.id)) {
+                setIsPinned(true)
+            }
+            else {
+                setIsPinned(false)
+            }
+        }
+    },[pinReady, oneZip])
+        
     const refreshZip = () => {
         getZipById(parsedId).then(setOneZip)
     }
     
     const handlePin = () => {
-        setIsPinned(!isPinned)
+        
         if(isPinned) {
+            debugger
             const foundPM = currentUser.userPinnedMarkets.find(pm => pm.zipCodeId === oneZip.id)
             deletePinnedMarket(foundPM.id)
+            setIsPinned(!isPinned)
         }
         else {
             const newPM = {
@@ -64,23 +74,26 @@ export default function ZipDetails() {
                 ZipCodeId: oneZip.id
             }
             addPinnedMarket(newPM)
+            setIsPinned(!isPinned)
         }
     }
 
     const pinnedStatus = () => {
-        if (isPinned) {
-            return (
-                <div title="Pinned" className="pin-container">
-                    <Pinned onClick={handlePin} style={{width: '34px', height: '57px'}}/>
-                </div>
-            )
-        }
-        else {
-            return (
-                <div title="Not pinned" className="pin-container">
-                    <img onClick={handlePin} width= '34px' height= '57px' src={NotPinned} alt="not pinned"  />
-                </div>
-            )
+        if(pinReady) {
+            if (isPinned) {
+                return (
+                    <div title="Pinned" className="pin-container">
+                        <Pinned onClick={handlePin} style={{width: '34px', height: '57px'}}/>
+                    </div>
+                )
+            }
+            else {
+                return (
+                    <div title="Not pinned" className="pin-container">
+                        <img onClick={handlePin} width= '34px' height= '57px' src={NotPinned} alt="not pinned"  />
+                    </div>
+                )
+            }
         }
     }
     
@@ -88,23 +101,22 @@ export default function ZipDetails() {
         <>
         <main className="maindetails-container">
             <div className="title-container">
-                <h1>{oneZip.zipCode} {oneZip.city}, {oneZip.state.stateAbbr}</h1>
+                <h1><span style={{color: "#3B5FB5", fontWeight: "bold"}}>{oneZip.zipCode}</span> {oneZip.city}, {oneZip.state.stateAbbr}</h1>
                 {pinnedStatus()}
             </div>
             <div className="graphs-container">
                 <div className ="oneGraph">
-                    <HPIGraph oneZip={oneZip} />
+                    {zipReady ? <HPIGraph oneZip={oneZip} /> : <Spinner />}
+                    
                 </div>
                 <div className="oneGraph">
-                    <ZVHIGraph oneZip={oneZip} />
+                    {zipReady ? <ZVHIGraph oneZip={oneZip} /> : <Spinner />}
                 </div>
             </div>
             <div className="COL-container">
                 <COLTable oneZip={oneZip} />
             </div>
-            <div className="feed-container">
-                <Feed refreshZip={refreshZip} oneZip={oneZip} />
-            </div>
+            <Feed refreshZip={refreshZip} oneZip={oneZip} />
         </main>
         </>
     )

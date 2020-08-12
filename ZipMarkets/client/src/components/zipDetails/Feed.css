@@ -1,16 +1,37 @@
+.feed-container {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-top: 3em;
+    justify-content: center;
+    width: 100%;
+    border: 5px solid;
+    border-color: rgb(0,0,0,.5);
+    padding-top: .2em
+}
+
+.messages-container {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 300px;
+    width: 100%;
+    overflow-y: scroll;
+    border: none !important;
+    padding: 1em !important
+}
+
 .message-container {
     display:flex;
     flex-flow: row nowrap;
-    width: 30%
+    margin-bottom: 1em;
 }
 
 .message-category {
-    width: 5vw
+    width: 5vw;
+    font-weight: bold;
 }
 .message-content {
-    width: 10vw
+    width: 20vw
 }
-
 
 .messageSubmit-container {
     display:flex;
@@ -20,5 +41,14 @@
 }
 
 .content-input {
-    width: 60% !important
+    width: 40% !important
 }
+
+.deletemsg-btn {
+    width: 30px !important;
+    height: 30px !important;
+    background-color: rgb(160, 36, 36) !important;
+    font-size: 10px !important;
+    padding: 3px !important
+}
+
