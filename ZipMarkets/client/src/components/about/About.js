@@ -19,28 +19,35 @@ export default function About() {
                         <p>There are several methodologies used to measure aggregate home pricing in a given area. Zip Markets utilizes two of those
                             methods including: Repeat Sales and Average or Median
                         </p>
-                    <h5>Repeat Sales</h5>
-                        <p>The repeated sale methodology focuses on homes that have sold more than once over a given time period. By calculating the
-                            appreciation of a given home's price after a sale, that value can be averaged with other homes to determine an aggregate
-                            home appreciation rate for a given area.
-                        </p>
-                        <p>
-                            The Federal Housing Finance Agency (FHFA) publishes annual reports on the repeated sale value for all US zip codes in the form
-                            of a Home Price Index (HPI). This information is gathered from homes whose mortgages have been purchased by Frannie Mae or Freddie
-                            Mac. Zip Markets displays HPI data for each individual zip code for the last 20 years compared to the US average.
-                        </p>
-                    <h5>Average or Median</h5>
-                        <p>
-                            The average/median methodology simply takes the average or median of all observed home prices in a given area. This is typically
-                            calculated when a house is sold or refinanced. 
-                        </p>
-                        <p>
-                            Zillow's research division publishes monthly reports of the Zillow Home Value Index (ZHVI) for all U.S. zip codes. Zillow calculates ZHVI
-                            through a variety of machine learning models and data sources to return an overal price for a given set of homes. In this way, the average home
-                            price for an area is weighted depending on many factors allowing for more accurate pricing by location. Zip Markets displays this data
-                            for each individual zip code for the last 20 years compared to the US Average
+                    <div className="about-card-container">
+                        <Card className="about-card">
+                            <div className="about-card-title">Repeat Sales</div>
+                            <p>The repeated sale methodology focuses on homes that have sold more than once over a given time period. By calculating the
+                                appreciation of a given home's price after a sale, that value can be averaged with other homes to determine an aggregate
+                                home appreciation rate for a given area.
+                            </p>
+                            <p>
+                                The Federal Housing Finance Agency (FHFA) publishes annual reports on the repeated sale value for all US zip codes in the form
+                                of a Home Price Index (HPI). This information is gathered from homes whose mortgages have been purchased by Frannie Mae or Freddie
+                                Mac. Zip Markets displays HPI data for each individual zip code for the last 20 years compared to the US average.
+                            </p>
+                        </Card>
+                        <Card className="about-card">
+                            <div className="about-card-title">Average or Median</div>
+                            <p>
+                                The average/median methodology simply takes the average or median of all observed home prices in a given area. This is typically
+                                calculated when a house is sold or refinanced. 
+                            </p>
+                            <p>
+                                Zillow's research division publishes monthly reports of the Zillow Home Value Index (ZHVI) for all U.S. zip codes. Zillow calculates ZHVI
+                                through a variety of machine learning models and data sources to return an overal price for a given set of homes. In this way, the average home
+                                price for an area is weighted depending on many factors allowing for more accurate pricing by location. Zip Markets displays this data
+                                for each individual zip code for the last 20 years compared to the US Average
 
-                        </p>
+                            </p>
+                        </Card>
+
+                    </div>
                     <h2>Sources</h2>
                     <h5>Data</h5>
                         <ul>

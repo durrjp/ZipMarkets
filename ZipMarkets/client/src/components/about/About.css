@@ -8,19 +8,32 @@
 
 .about-content-container {
     margin-top: 2em;
-    padding-left: 15em;
-    padding-right: 15em
+    padding-left: 5%;
+    padding-right: 5%
 }
 
 h2 {
     color: #FFBB63
 }
 
-p {
-    text-indent: 2em;
-    color: #E6E8F9
-}
-
 h5 {
     color: #a9dff5
+}
+
+.about-card-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.about-card {
+    width: 400px;
+    padding: 1em;
+    background-color: #E6E8F9 !important;
+    color: #373A62 !important
+}
+
+.about-card-title {
+    font-weight: bold;
+    font-size: 25px;
 }
