@@ -60,6 +60,21 @@ export default function Header() {
                     {isLoggedIn &&
                     <>
                         <NavItem>
+                        <NavLink tag={RRNavLink} to="/about"
+                            aria-current="page"
+                            className="nav-link"
+                            style={{ cursor: "pointer" }}
+                        ><svg width="30" height="30" viewBox="0 0 81 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M40.5 0C18.1687 0 0 18.1687 0 40.5C0 62.8313 18.1687 81 40.5 81C62.8313 81 81 62.8313 81 40.5C81 18.1687 62.8313 0 40.5 0ZM47.2501 65.8125C47.2501 66.7453 46.4953 67.5001 45.5625 67.5001H35.4375C34.5047 67.5001 33.7499 66.7453 33.7499 65.8125V40.5H32.0624C31.1296 40.5 30.3748 39.7452 30.3748 38.8124V32.0624C30.3748 31.1296 31.1296 30.3748 32.0624 30.3748H45.5625C46.4953 30.3748 47.2501 31.1296 47.2501 32.0624V65.8125ZM40.5 27.0001C36.7773 27.0001 33.7499 23.9728 33.7499 20.25C33.7499 16.5272 36.7773 13.4999 40.5 13.4999C44.2227 13.4999 47.2501 16.5272 47.2501 20.25C47.2501 23.9728 44.2227 27.0001 40.5 27.0001Z" fill="black"/>
+                        </svg>
+                                               
+                        </NavLink>
+                        </NavItem>
+                    </>
+                    }
+                    {isLoggedIn &&
+                    <>
+                        <NavItem>
                         <NavLink tag={RRNavLink} to="/login"
                             aria-current="page"
                             className="nav-link"
