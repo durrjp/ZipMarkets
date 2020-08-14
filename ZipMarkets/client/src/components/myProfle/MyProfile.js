@@ -64,6 +64,7 @@ export default function MyProfile() {
                       valid
                       id="homezip"
                       type="number"
+                      className="input-back"
                       defaultValue={currentUser.homeZip.zipCode}
                       onChange={(e) => checkValidZip(e.target.value)}
                     />
@@ -78,6 +79,7 @@ export default function MyProfile() {
                       invalid
                       id="homezip"
                       type="number"
+                      className="input-back"
                       defaultValue={currentUser.homeZip.zipCode}
                       onChange={(e) => checkValidZip(e.target.value)}
                     />
@@ -123,6 +125,7 @@ export default function MyProfile() {
                             <Input
                               id="displayName"
                               type="text"
+                              className="input-back"
                               defaultValue={displayName}
                               onChange={(e) => setDisplayName(e.target.value)}
                               />
@@ -136,6 +139,7 @@ export default function MyProfile() {
                             <Label for="minHomePrice">Home Price Interest (minimum)</Label>
                             <Input
                               id="minHomePrice"
+                              className="input-back"
                               type="number"
                               defaultValue={minHomePrice}
                               onChange={(e) => setHomePriceMin(parseInt(e.target.value))}
@@ -146,6 +150,7 @@ export default function MyProfile() {
                             <Input
                               id="maxHomePrice"
                               type="number"
+                              className="input-back"
                               defaultValue={maxHomePrice}
                               onChange={(e) => setHomePriceMax(parseInt(e.target.value))}
                               />
@@ -155,7 +160,7 @@ export default function MyProfile() {
                             <input
                               id="filterByPrice"
                               type="checkbox"
-                              className="checkbox-bigger"
+                              className="checkbox-bigger input-back"
                               checked={filterByPrice}
                               onChange={(e) => setFilterByPrice(!filterByPrice)}
                               />

@@ -7,14 +7,19 @@
 }
 
 .settings-card {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25) !important;
     margin-bottom: 3em;
+    background-color: #E6E8F9 !important
 }
 
 .checkbox-bigger {
     transform: scale(2);
     -webkit-transform: scale(2);
     margin-left: 3em;
+}
+
+.input-back {
+    background-color: rgb(251, 251, 251) !important;
 }
 
 .settings-title {
