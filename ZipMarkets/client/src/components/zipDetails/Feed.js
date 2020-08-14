@@ -70,8 +70,7 @@ export default function Feed({oneZip, refreshZip}) {
                 </Input>
                 <Button
                     type="submit"
-                    style={{backgroundColor: "rgb(130, 214, 130)", color:"black", marginLeft: "1em"}}
-                    className="messagebtn"
+                    className="message-btn"
                     size="md"
                     onClick={(e) => {
                         e.preventDefault()

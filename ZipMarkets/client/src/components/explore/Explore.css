@@ -4,6 +4,13 @@
 }
 
 .explore-btn {
-    background-color: #6a6a6e !important;
+    background:linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+	background-color:#eae0c2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: black !important;
     margin-left: .5em;
+}
+
+.modal-header {
+    color: #373A62
 }
