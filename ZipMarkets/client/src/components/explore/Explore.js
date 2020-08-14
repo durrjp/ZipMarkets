@@ -96,7 +96,7 @@ export default function Explore() {
                     setChosenZip(null)}
                 }
             >
-                <h2>{chosenZip.zipCode}</h2>
+                <h3>{chosenZip.zipCode}</h3>
                 <p>{chosenZip.city}, {chosenZip.state.stateName}</p>
                 <p>{chosenZip.county}</p>
                 <Button onClick={handleClick}>Details</Button>

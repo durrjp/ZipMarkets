@@ -3,6 +3,8 @@
     height: 100%;
     padding: 1em;
     background-color: #373A62;
+    background-image: url("https://www.transparenttextures.com/patterns/always-grey.png");
+    background-attachment: fixed;
     color: rgb(236, 236, 236)
 }
 
@@ -31,7 +33,7 @@
 .title-container {
     display: flex;
     justify-content: center;
-    background-color: rgb(236, 236, 236);
+    background-color: #E6E8F9;
     margin: auto;
     padding: 1em;
     color: black;

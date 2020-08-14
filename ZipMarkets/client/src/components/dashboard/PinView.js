@@ -20,7 +20,7 @@ export default function PinView({pinView, currentUser, refresh, setPinView}) {
 
     if(pinView.length === 0) {
         return (
-            <Card>
+            <Card className="pinview-card">
                 <CardBody>
                     <h4>Select a zip code...</h4>
                 </CardBody>
