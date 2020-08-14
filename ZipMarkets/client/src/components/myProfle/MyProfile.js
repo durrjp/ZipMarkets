@@ -40,15 +40,21 @@ export default function MyProfile() {
       };
       
       const checkValidZip = debounce((zip) => {
-        getZipByZipCode(zip).then(res => {
-          if(res.title !== "Not Found" && zip.length !== 0) {
-            setHomeZip(res)
-          }
-          else {
-            setHomeZip(0)
-          }
-        })
-      }, 800)
+        if (zip !== "") {
+          getZipByZipCode(zip).then(res => {
+            if(res.title !== "Not Found" && zip.length !== 0) {
+              setHomeZip(res)
+            }
+            else {
+              setHomeZip(0)
+            }
+          })
+        }
+        else {
+          setHomeZip(0)
+        }
+        }, 800)
+
       const zipValidation = () => {
           if(currentUser) {
               if(homeZip !== 0) {
@@ -107,63 +113,63 @@ export default function MyProfile() {
         <main className="main-container">
             <div className="container pt-4">
                 <div className="row justify-content-center">
-                <Card className="col-sm-12 col-lg-6">
-                    <h1 className="row justify-content-center">Settings</h1>
+                <Card className="col-sm-12 col-lg-6 settings-card">
+                    <h1 className="row justify-content-center settings-title">Settings</h1>
                     <CardBody>
-            <Form onSubmit={saveSettings}>
-              <fieldset>
-                <FormGroup>
-                  <Label htmlFor="displayName">Edit Display Name</Label>
-                  <Input
-                    id="displayName"
-                    type="text"
-                    defaultValue={displayName}
-                    onChange={(e) => setDisplayName(e.target.value)}
-                    />
-                </FormGroup>
-                <FormGroup>
-                  <Label htmlFor="displayName">Edit Home Zip Code</Label>
-                  {zipValidation()}
-                  <FormText>Please enter a valid U.S. zip code</FormText>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="minHomePrice">Home Price Interest (minimum)</Label>
-                  <Input
-                    id="minHomePrice"
-                    type="number"
-                    defaultValue={minHomePrice}
-                    onChange={(e) => setHomePriceMin(parseInt(e.target.value))}
-                    />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="maxHomePrice">Home Price Interest (maximum)</Label>
-                  <Input
-                    id="maxHomePrice"
-                    type="number"
-                    defaultValue={maxHomePrice}
-                    onChange={(e) => setHomePriceMax(parseInt(e.target.value))}
-                    />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="filterByPrice">Filter Map By Price Interest</Label>
-                  <input
-                    id="filterByPrice"
-                    type="checkbox"
-                    className="checkbox-bigger"
-                    checked={filterByPrice}
-                    onChange={(e) => setFilterByPrice(!filterByPrice)}
-                    />
-                    <FormText>Filtering the map by price interest will display zip codes that currently have an average home price
-                      within your minimum and maximum prices above. Enabling filtering also GREATLY increases map processing speed allowing
-                      for easier exploring of zip codes across the country!
-                    </FormText>
-                </FormGroup>
-                <FormGroup>
-                  <Button>Save</Button>
-                </FormGroup>
-              </fieldset>
-            </Form>
-          </CardBody>
+                      <Form onSubmit={saveSettings}>
+                        <fieldset>
+                          <FormGroup>
+                            <Label htmlFor="displayName">Edit Display Name</Label>
+                            <Input
+                              id="displayName"
+                              type="text"
+                              defaultValue={displayName}
+                              onChange={(e) => setDisplayName(e.target.value)}
+                              />
+                          </FormGroup>
+                          <FormGroup>
+                            <Label htmlFor="displayName">Edit Home Zip Code</Label>
+                            {zipValidation()}
+                            <FormText>Please enter a valid U.S. zip code</FormText>
+                          </FormGroup>
+                          <FormGroup>
+                            <Label for="minHomePrice">Home Price Interest (minimum)</Label>
+                            <Input
+                              id="minHomePrice"
+                              type="number"
+                              defaultValue={minHomePrice}
+                              onChange={(e) => setHomePriceMin(parseInt(e.target.value))}
+                              />
+                          </FormGroup>
+                          <FormGroup>
+                            <Label for="maxHomePrice">Home Price Interest (maximum)</Label>
+                            <Input
+                              id="maxHomePrice"
+                              type="number"
+                              defaultValue={maxHomePrice}
+                              onChange={(e) => setHomePriceMax(parseInt(e.target.value))}
+                              />
+                          </FormGroup>
+                          <FormGroup>
+                            <Label for="filterByPrice">Filter Map By Price Interest</Label>
+                            <input
+                              id="filterByPrice"
+                              type="checkbox"
+                              className="checkbox-bigger"
+                              checked={filterByPrice}
+                              onChange={(e) => setFilterByPrice(!filterByPrice)}
+                              />
+                              <FormText>Filtering the map by price interest will display zip codes that currently have an average home price
+                                within your minimum and maximum prices above. Enabling filtering also GREATLY increases map processing speed allowing
+                                for easier exploring of zip codes across the country!
+                              </FormText>
+                          </FormGroup>
+                          <FormGroup>
+                            <Button>Save</Button>
+                          </FormGroup>
+                        </fieldset>
+                      </Form>
+                  </CardBody>
                 </Card>
                 </div>
             </div>

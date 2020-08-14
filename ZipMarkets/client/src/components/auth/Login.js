@@ -26,7 +26,7 @@ export default function Login() {
     <main className="login-container">
     <div className="container pt-4">
       <div className="row justify-content-center">
-        <Card className="col-sm-12 col-lg-6">
+        <Card className="col-sm-12 col-lg-6 login-card">
           <CardBody>
               <div className="row justify-content-center">
                     <img src={logo} alt="logo" />

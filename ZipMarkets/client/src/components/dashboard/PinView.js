@@ -32,7 +32,7 @@ export default function PinView({pinView, currentUser, refresh, setPinView}) {
 
     return(
         <>
-            <Card>
+            <Card className="pinview-card">
                 <CardBody>
                     <CardText>
                         <div className="unpinbtn-container">
