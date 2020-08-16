@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ZipMarkets.Data;
+using ZipMarkets.Models;
 
 namespace ZipMarkets.Repositories
 {
@@ -13,6 +14,12 @@ namespace ZipMarkets.Repositories
         public MortgageRateRepository(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public List<MortgageRate> GetAll()
+        {
+            return _context.MortgageRate
+                .ToList();
         }
     }
 }

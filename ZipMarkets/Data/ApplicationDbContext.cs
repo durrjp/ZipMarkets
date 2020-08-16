@@ -19,6 +19,7 @@ namespace ZipMarkets.Data
         public DbSet<State> States { get; set; }
         public DbSet<UserType> UserType { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<MortgageRate> MortgageRate { get; set; }
 
     }
 }

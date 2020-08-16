@@ -9,6 +9,7 @@ import PinnedMarketProvider from './providers/PinnedMarketProvider';
 import MessageProvider from './providers/MessageProvider';
 import HPiProvider from './providers/HPIProvider';
 import ZVHIProvider from './providers/ZVHIProvider';
+import MortgageRateProvider from './providers/MortgageRateProvider';
 
 
 function App() {
@@ -20,8 +21,10 @@ function App() {
             <MessageProvider>
               <HPiProvider>
                 <ZVHIProvider>
-                  <Header />
-                  <ApplicationViews  />
+                  <MortgageRateProvider>
+                    <Header />
+                    <ApplicationViews  />
+                  </MortgageRateProvider>
                 </ZVHIProvider>
               </HPiProvider>
             </MessageProvider>
