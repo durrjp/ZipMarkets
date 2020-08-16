@@ -11,6 +11,7 @@ import { PinnedMarketContext } from "../../providers/PinnedMarketProvider"
 import { UserContext } from "../../providers/UserProvider"
 import Feed from "./Feed"
 import { Spinner } from "reactstrap"
+import MortgageRateGraph from "./MortgageRateGraph"
 
 export default function ZipDetails() {
     const {getZipById, setZipReady, zipReady} = useContext(ZipContext)
@@ -111,6 +112,11 @@ export default function ZipDetails() {
                 </div>
                 <div className="oneGraph">
                     {zipReady ? <ZVHIGraph oneZip={oneZip} /> : <Spinner />}
+                </div>
+            </div>
+            <div className="mrGraph-container">
+                <div className="mrGraph">
+                    {zipReady ? <MortgageRateGraph /> : <Spinner />}
                 </div>
             </div>
             <div className="COL-container">

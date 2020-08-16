@@ -140,6 +140,12 @@ export default function HPIGraph({oneZip}) {
         <Line
             data={data}
             options={{
+                lineHeightAnnotation: {
+                    color: "rgb(255,255,255,.5)",
+                    hover: false,
+                    always: false,
+                    noDash: true
+                },
                 legend: {
                     labels: {
                         fontColor: "rgb(236, 236, 236)"
