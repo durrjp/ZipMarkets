@@ -20,12 +20,12 @@ export default function HPIGraph({oneZip}) {
         if(oneZip.hpiList.find(hpi => hpi.year === year)) {
             const foundUsAvg = avgHPIs.find(avg => avg.year === year)
             const foundHPI = oneZip.hpiList.find(hpi => hpi.year === year)
-            yearObj["avg"] = foundUsAvg.average
+            yearObj["avg"] = foundUsAvg.average.toFixed(2)
             yearObj["zip"] = foundHPI.hpi
         }
         else {
             const foundUsAvg = avgHPIs.find(avg => avg.year === year)
-            yearObj["avg"] = foundUsAvg.average
+            yearObj["avg"] = foundUsAvg.average.toFixed(2)
             yearObj["zip"] = null
         }
         return yearObj

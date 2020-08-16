@@ -170,7 +170,7 @@ export default function MyProfile() {
                               </FormText>
                           </FormGroup>
                           <FormGroup>
-                            <Button>Save</Button>
+                            <Button className="savesettings-btn">Save</Button>
                           </FormGroup>
                         </fieldset>
                       </Form>

@@ -58,7 +58,7 @@ export default function Login() {
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Button>Login</Button>
+                  <Button className="login-btn">Login</Button>
                 </FormGroup>
                 <em>
                   Not registered? <Link to="register">Register</Link>

@@ -26,12 +26,12 @@ export default function ZVHIGraph({oneZip}) {
         if(oneZip.zvhiList.find(zvhi => zvhi.date === year)) {
             const foundUsAvg = avgZVHIs.find(avg => avg.date === year)
             const foundzvhi = oneZip.zvhiList.find(zvhi => zvhi.date === year)
-            yearObj["avg"] = foundUsAvg.average
+            yearObj["avg"] = foundUsAvg.average.toFixed(0)
             yearObj["zip"] = foundzvhi.value
         }
         else {
             const foundUsAvg = avgZVHIs.find(avg => avg.date === year)
-            yearObj["avg"] = foundUsAvg.average
+            yearObj["avg"] = foundUsAvg.average.toFixed(0)
             yearObj["zip"] = null
         }
         return yearObj

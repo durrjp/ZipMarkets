@@ -169,7 +169,7 @@ export default function Register() {
                     />
                 </FormGroup>
                 <FormGroup>
-                  <Button>Register</Button>
+                  <Button className="login-btn">Register</Button>
                 </FormGroup>
               </fieldset>
             </Form>
