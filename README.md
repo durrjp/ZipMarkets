@@ -4,6 +4,10 @@ Zip Markets is a housing market tracking app powered by data from the Federal Ho
 
 [zipmarkets.azurewebsites.net](https://zipmarkets.azurewebsites.net/)
 
+Test Credentials:
+Email: jon@jon.com
+Password: jonjon
+
 ## Technologies
 ### Front End
 * HTML, CSS, Javascript
