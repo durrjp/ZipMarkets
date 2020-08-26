@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react"
+import {Input, Button} from "reactstrap";
 import { UserContext } from "../../providers/UserProvider";
 import PinnedMarket from "./PinnedMarket";
 import "./Dashboard.css"
@@ -37,6 +38,30 @@ export default function Dashboard() {
                 <div className="pinView-container">
                     <PinView setPinView={setPinView} refresh={refreshUser} currentUser={currentUser} pinView={pinView} />
                 </div>
+            </div>
+            <div>
+                <h1>Compare</h1>
+                <Input
+                    type="select"
+                >
+                    {
+                        currentUser.userPinnedMarkets.map(pm => {
+                            return <option>{pm.zipCode.zipCode}</option>
+                        })
+                    }
+                </Input>
+                <Input
+                    type="select"
+                >
+                    {
+                        currentUser.userPinnedMarkets.map(pm => {
+                            return <option>{pm.zipCode.zipCode}</option>
+                        })
+                    }
+                </Input>
+                <Button>
+                    Compare
+                </Button>
             </div>
         </main>
     )
