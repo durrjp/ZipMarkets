@@ -12,11 +12,6 @@ export default function ZVHIGraph({oneZip}) {
         getAvgZVHIs()
     },[])
 
-    // const usYearArray = avgZVHIs.map(year => {
-    //     const splitDate = year.date.split("")
-    //     return `${splitDate[0]}${splitDate[1]}${splitDate[2]}${splitDate[3]}`
-    // })
-
     const usYearArray = avgZVHIs.map(year => {
         return year.date
     })
