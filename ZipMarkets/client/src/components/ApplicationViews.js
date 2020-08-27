@@ -35,7 +35,7 @@ export default function ApplicationViews() {
                     {   isLoggedIn ? <About /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/comparison" exact>
+                <Route path="/comparison/:zips" exact>
                     {   isLoggedIn ? <Comparison />: <Redirect to="/login" />}
                 </Route>
 

@@ -9,8 +9,8 @@ import { useHistory } from "react-router-dom";
 export default function Dashboard() {
     const {getUser} = useContext(UserContext)
     const [pinView, setPinView] = useState([])
-    const [firstZip, setFirstZip] = useState()
-    const [secondZip, setSecondZip] = useState()
+    const [firstZip, setFirstZip] = useState(0)
+    const [secondZip, setSecondZip] = useState(0)
     const history = useHistory()
     const [currentUser, setCurrentUser] = useState({
         userPinnedMarkets: []
@@ -25,7 +25,9 @@ export default function Dashboard() {
     }
 
     const routeToCompare = () => {
-        history.push(`/comparison/${firstZip},${secondZip}`)
+        if(firstZip !== 0 && secondZip !== 0) {
+            history.push(`/comparison/${firstZip},${secondZip}`)
+        }
     }
 
 
@@ -54,6 +56,7 @@ export default function Dashboard() {
                     type="select"
                     onChange={e => setFirstZip(e.target.value)}
                 >
+                    <option value="0">Select a zip code...</option>
                     {
                         currentUser.userPinnedMarkets.map(pm => {
                             return <option value={pm.zipCode.id}>{pm.zipCode.zipCode}</option>
@@ -64,6 +67,7 @@ export default function Dashboard() {
                     type="select"
                     onChange={e => setSecondZip(e.target.value)}
                 >
+                    <option value="0">Select a zip code...</option>
                     {
                         currentUser.userPinnedMarkets.map(pm => {
                             return <option>{pm.zipCode.zipCode}</option>
