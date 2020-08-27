@@ -40,6 +40,15 @@ namespace ZipMarkets.Controllers
             return Ok(_zipRepository.GetByPrice(minPrice, maxPrice));
         }
 
+        [HttpGet("comparison/zips")]
+        public IActionResult GetTwoZips(string zips)
+        {
+            int[] zipArray = zips.Split(",").Select(Int32.Parse).ToArray();
+            int firstZip = zipArray.First();
+            int secondZip = zipArray.Last();
+            return Ok(_zipRepository.GetTwoZips(firstZip, secondZip));
+        }
+
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)

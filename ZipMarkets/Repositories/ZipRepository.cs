@@ -41,6 +41,16 @@ namespace ZipMarkets.Repositories
                            .ToList();
         }
 
+        public List<Zip> GetTwoZips(int first, int second)
+        {
+            return _context.AllZips
+                           .Include(z => z.State)
+                           .Include(z => z.ZVHIList)
+                           .Include(z => z.HPIList)
+                           .Where(z => z.ZipCode == first || z.ZipCode == second)
+                           .ToList();
+        }
+
         public Zip GetById(int id)
         {
             return _context.AllZips
