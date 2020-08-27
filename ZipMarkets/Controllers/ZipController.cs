@@ -40,7 +40,7 @@ namespace ZipMarkets.Controllers
             return Ok(_zipRepository.GetByPrice(minPrice, maxPrice));
         }
 
-        [HttpGet("comparison/zips")]
+        [HttpGet("comparison/{zips}")]
         public IActionResult GetTwoZips(string zips)
         {
             int[] zipArray = zips.Split(",").Select(Int32.Parse).ToArray();

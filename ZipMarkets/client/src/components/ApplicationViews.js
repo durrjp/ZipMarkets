@@ -8,6 +8,7 @@ import Dashboard from "./dashboard/Dashboard";
 import Register from "./auth/Register";
 import MyProfile from "./myProfle/MyProfile";
 import About from "./about/About";
+import Comparison from "./zipDetails/Comparison";
 
 export default function ApplicationViews() {
     const { isLoggedIn, isAdmin } = useContext(UserContext);
@@ -23,7 +24,7 @@ export default function ApplicationViews() {
                 </Route>
 
                 <Route path="/zip/:id" exact>
-                    {isLoggedIn ? <ZipDetails /> : <Redirect to="/login" />}
+                    {   isLoggedIn ? <ZipDetails /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/myprofile" exact>
@@ -32,6 +33,10 @@ export default function ApplicationViews() {
 
                 <Route path="/about" exact>
                     {   isLoggedIn ? <About /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/comparison" exact>
+                    {   isLoggedIn ? <Comparison />: <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/login">
