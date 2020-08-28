@@ -4,7 +4,7 @@ import { ZVHIContext } from "../../providers/ZVHIProvider"
 import { Table } from "reactstrap"
 
 
-export default function ZVHIGraph({oneZip}) {
+export default function ZVHIGraph({twoZips}) {
     const {avgZVHIs, getAvgZVHIs} = useContext(ZVHIContext)
 
 
@@ -12,27 +12,31 @@ export default function ZVHIGraph({oneZip}) {
         getAvgZVHIs()
     },[])
 
-    // const usYearArray = avgZVHIs.map(year => {
-    //     const splitDate = year.date.split("")
-    //     return `${splitDate[0]}${splitDate[1]}${splitDate[2]}${splitDate[3]}`
-    // })
-
     const usYearArray = avgZVHIs.map(year => {
         return year.date
     })
     
     const missedYearsArray = usYearArray.map(year => {
         const yearObj = {"year": year}
-        if(oneZip.zvhiList.find(zvhi => zvhi.date === year)) {
-            const foundUsAvg = avgZVHIs.find(avg => avg.date === year)
-            const foundzvhi = oneZip.zvhiList.find(zvhi => zvhi.date === year)
-            yearObj["avg"] = foundUsAvg.average.toFixed(0)
-            yearObj["zip"] = foundzvhi.value
+        if(twoZips[0].zvhiList.find(zhvi => zhvi.date === year) && twoZips[1].zvhiList.find(zhvi => zhvi.date === year)) {
+            const foundZHVI1 = twoZips[0].zvhiList.find(zhvi => zhvi.date === year)
+            const foundZHVI2 = twoZips[1].zvhiList.find(zhvi => zhvi.date === year)
+            yearObj["zip1"] = foundZHVI1.value
+            yearObj["zip2"] = foundZHVI2.value
+        }
+        else if (twoZips[0].zvhiList.find(zhvi => zhvi.date === year)) {
+            const foundZHVI1 = twoZips[0].zvhiList.find(zhvi => zhvi.date === year)
+            yearObj["zip1"] = foundZHVI1.value
+            yearObj["zip2"] = null
+        }
+        else if (twoZips[1].zvhiList.find(zhvi => zhvi.date === year)) {
+            const foundZHVI2 = twoZips[1].zvhiList.find(zhvi => zhvi.date === year)
+            yearObj["zip1"] = null
+            yearObj["zip2"] = foundZHVI2.value
         }
         else {
-            const foundUsAvg = avgZVHIs.find(avg => avg.date === year)
-            yearObj["avg"] = foundUsAvg.average.toFixed(0)
-            yearObj["zip"] = null
+            yearObj["zip1"] = null
+            yearObj["zip2"] = null
         }
         return yearObj
     })
@@ -42,12 +46,12 @@ export default function ZVHIGraph({oneZip}) {
         return `${splitDate[0]}${splitDate[1]}${splitDate[2]}${splitDate[3]}`
     })  
 
-    const zipValues = missedYearsArray.map(year => {
-        return year.zip
+    const zip1Values = missedYearsArray.map(year => {
+        return year.zip1
     })
 
-    const usValues = missedYearsArray.map(year => {
-        return year.avg
+    const zip2Values = missedYearsArray.map(year => {
+        return year.zip2
     })
     
     
@@ -55,8 +59,8 @@ export default function ZVHIGraph({oneZip}) {
         labels: shortYearArray,
         datasets: [
             {
-                data: zipValues,
-                label: oneZip.zipCode,
+                data: zip1Values,
+                label: twoZips[0].zipCode,
                 fill: false,
                 lineTension: 0.1,
                 backgroundColor: 'rgba(255,187,99,0.4)',
@@ -71,9 +75,9 @@ export default function ZVHIGraph({oneZip}) {
                 pointHitRadius: 10
             },
             {
-                data: usValues,
+                data: zip2Values,
                 fill: false,
-                label: "US Average",
+                label: twoZips[1].zipCode,
                 lineTension: 0.1,
                 backgroundColor: 'rgba(82,113,255,0.4)',
                 borderColor: 'rgba(82,113,255,1)',
@@ -92,54 +96,54 @@ export default function ZVHIGraph({oneZip}) {
         ]
     }
 
-    if(oneZip.zvhiList.length === 0 || avgZVHIs.length === 0) {
-        return null
-    }
-    const newArray = oneZip.zvhiList.slice()
-    const reverseArray = newArray.reverse()
-    const yearPercChange = (((reverseArray[0].value - reverseArray[1].value) / reverseArray[1].value)*100).toFixed(2)
-    const fiveYearPercChange = (((reverseArray[0].value - reverseArray[4].value) / reverseArray[4].value)*100).toFixed(2)
+    // if(oneZip.zvhiList.length === 0 || avgZVHIs.length === 0) {
+    //     return null
+    // }
+    // const newArray = oneZip.zvhiList.slice()
+    // const reverseArray = newArray.reverse()
+    // const yearPercChange = (((reverseArray[0].value - reverseArray[1].value) / reverseArray[1].value)*100).toFixed(2)
+    // const fiveYearPercChange = (((reverseArray[0].value - reverseArray[4].value) / reverseArray[4].value)*100).toFixed(2)
 
-    const newUSArray = avgZVHIs.slice()
-    const reverseUsArray = newUSArray.reverse()
-    const yearUSPercChange = (((reverseUsArray[0].average - reverseUsArray[1].average) / reverseUsArray[1].average)*100).toFixed(2)
-    const fiveUSYearPercChange = (((reverseUsArray[0].average - reverseUsArray[4].average) / reverseUsArray[4].average)*100).toFixed(2)
+    // const newUSArray = avgZVHIs.slice()
+    // const reverseUsArray = newUSArray.reverse()
+    // const yearUSPercChange = (((reverseUsArray[0].average - reverseUsArray[1].average) / reverseUsArray[1].average)*100).toFixed(2)
+    // const fiveUSYearPercChange = (((reverseUsArray[0].average - reverseUsArray[4].average) / reverseUsArray[4].average)*100).toFixed(2)
 
-    let ypcColor = ""
-    if (yearPercChange > 0) {
-        ypcColor = "rgb(114, 207, 114)"
-    } 
-    else {
-        ypcColor = "rgb(238, 49, 49)"
+    // let ypcColor = ""
+    // if (yearPercChange > 0) {
+    //     ypcColor = "rgb(114, 207, 114)"
+    // } 
+    // else {
+    //     ypcColor = "rgb(238, 49, 49)"
 
-    }
+    // }
 
-    let fpcColor = ""
-    if (fiveYearPercChange > 0) {
-        fpcColor = "rgb(114, 207, 114)"
-    } 
-    else {
-        fpcColor = "rgb(238, 49, 49)"
+    // let fpcColor = ""
+    // if (fiveYearPercChange > 0) {
+    //     fpcColor = "rgb(114, 207, 114)"
+    // } 
+    // else {
+    //     fpcColor = "rgb(238, 49, 49)"
 
-    }
+    // }
 
-    let ypcUSColor = ""
-    if (yearUSPercChange > 0) {
-        ypcUSColor = "rgb(114, 207, 114)"
-    } 
-    else {
-        ypcUSColor = "rgb(238, 49, 49)"
+    // let ypcUSColor = ""
+    // if (yearUSPercChange > 0) {
+    //     ypcUSColor = "rgb(114, 207, 114)"
+    // } 
+    // else {
+    //     ypcUSColor = "rgb(238, 49, 49)"
 
-    }
+    // }
 
-    let fpcUSColor = ""
-    if (fiveUSYearPercChange > 0) {
-        fpcUSColor = "rgb(114, 207, 114)"
-    } 
-    else {
-        fpcUSColor = "rgb(238, 49, 49)"
+    // let fpcUSColor = ""
+    // if (fiveUSYearPercChange > 0) {
+    //     fpcUSColor = "rgb(114, 207, 114)"
+    // } 
+    // else {
+    //     fpcUSColor = "rgb(238, 49, 49)"
 
-    }
+    // }
 
 
     return (
@@ -194,7 +198,7 @@ export default function ZVHIGraph({oneZip}) {
                 }
             }}
         />
-        <Table style={{marginTop:"1em", color: "white"}}>
+        {/* <Table style={{marginTop:"1em", color: "white"}}>
                 <thead>
                     <tr>
                         <th></th>
@@ -214,7 +218,7 @@ export default function ZVHIGraph({oneZip}) {
                         <td style={{color: fpcUSColor}}>{fiveUSYearPercChange}%</td>
                     </tr>
                 </tbody>
-            </Table>
+            </Table> */}
         </>
     )
 }

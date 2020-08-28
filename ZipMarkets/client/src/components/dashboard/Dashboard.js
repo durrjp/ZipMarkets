@@ -59,7 +59,7 @@ export default function Dashboard() {
                     <option value="0">Select a zip code...</option>
                     {
                         currentUser.userPinnedMarkets.map(pm => {
-                            return <option value={pm.zipCode.id}>{pm.zipCode.zipCode}</option>
+                            return <option value={pm.zipCode.zipCode}>{pm.zipCode.zipCode}</option>
                         })
                     }
                 </Input>
@@ -70,7 +70,7 @@ export default function Dashboard() {
                     <option value="0">Select a zip code...</option>
                     {
                         currentUser.userPinnedMarkets.map(pm => {
-                            return <option>{pm.zipCode.zipCode}</option>
+                            return <option value={pm.zipCode.zipCode}>{pm.zipCode.zipCode}</option>
                         })
                     }
                 </Input>

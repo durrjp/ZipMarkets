@@ -8,7 +8,7 @@ import Dashboard from "./dashboard/Dashboard";
 import Register from "./auth/Register";
 import MyProfile from "./myProfle/MyProfile";
 import About from "./about/About";
-import Comparison from "./zipDetails/Comparison";
+import Comparison from "./comparison/Comparison";
 
 export default function ApplicationViews() {
     const { isLoggedIn, isAdmin } = useContext(UserContext);

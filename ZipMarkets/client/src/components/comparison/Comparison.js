@@ -1,15 +1,17 @@
 import React, { useContext, useEffect } from "react"
 import { ZipContext } from "../../providers/ZipProvider"
-import HPIGraph from "./HPIGraph"
-import ZVHIGraph from "./ZVHIGraph"
-import MortgageRateGraph from "./MortgageRateGraph"
-import COLTable from "./COLTable"
+import HPIGraph from "../zipDetails/HPIGraph"
+import ZVHIGraph from "../zipDetails/ZVHIGraph"
+import MortgageRateGraph from "../zipDetails/MortgageRateGraph"
+import COLTable from "../zipDetails/COLTable"
 import { useParams } from "react-router-dom"
+import CompHPIGraph from "./CompHPIGraph"
+import CompZHVIGraph from "./CompZHVIGraph"
 
 export default function Comparison() {
     const {twoZips, getTwoZips} = useContext(ZipContext)
     const zips = useParams()
-    
+
     useEffect(() => {
         getTwoZips(zips.zips)
     },[])
@@ -17,29 +19,24 @@ export default function Comparison() {
     if(twoZips.length === 0) {
         return null
     }
-
+    debugger
     return (
         <main className="maindetails-container">
             <div className="title-container">
                 <h1><span style={{color: "#3B5FB5", fontWeight: "bold"}}>{twoZips[0].zipCode}</span> vs {twoZips[1].zipCode}</h1>
             </div>
-            {/* <div className="graphs-container">
+            <div className="graphs-container">
                 <div className ="oneGraph">
-                   <HPIGraph twoZips={twoZips} />
+                   <CompHPIGraph twoZips={twoZips} />
                     
                 </div>
                 <div className="oneGraph">
-                    <ZVHIGraph twoZips={twoZips} />
-                </div>
-            </div>
-            <div className="mrGraph-container">
-                <div className="mrGraph">
-                    <MortgageRateGraph />
+                    <CompZHVIGraph twoZips={twoZips} />
                 </div>
             </div>
             <div className="COL-container">
-                <COLTable twoZips={twoZips} />
-            </div> */}
+                {/* <COLTable twoZips={twoZips} /> */}
+            </div>
         </main>
     )
 }
