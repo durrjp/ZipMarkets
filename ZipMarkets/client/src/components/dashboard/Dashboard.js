@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react"
-import {Input, Button} from "reactstrap";
+import {Button} from "reactstrap";
 import { UserContext } from "../../providers/UserProvider";
 import PinnedMarket from "./PinnedMarket";
 import "./Dashboard.css"
@@ -51,73 +51,56 @@ export default function Dashboard() {
     return (
         <main className="dashboard-container">
             <div className="title-container" style={{marginTop: "1em", marginBottom: "2em"}}>
-                <h1>Pinned Markets</h1>
+                <h1>Dashboard</h1>
             </div>
-            <div className="secondmain-container">
-                <div className="pinnedMarkets-container">
-                    {
-                        currentUser.userPinnedMarkets.map(pm => {
-                            return <PinnedMarket key={pm.id} pm={pm} pinView={pinView} setPinView={setPinView} />
-                        })
-                    }
-                </div>
-                <div className="pinView-container">
-                    <PinView setPinView={setPinView} refresh={refreshUser} currentUser={currentUser} pinView={pinView} />
-                </div>
-            </div>
-            <div>
-                <h1>Compare</h1>
-                <div className="dropboxes-container">
-                    <div className="dropbox" 
-                         onDragOver={e => onDragOver(e)}
-                         onDrop={e => onDrop(e, "chosenMarket1")}
-                    >
-                        Drag zip code here
+            <div className="bodycontainer">
+                <div className="secondmain-container">
+                    <div style={{textAlign: "center"}}>
+                        <h1 style={{color: "white"}}>Pinned Markets</h1>
+                    </div>
+                    <div className="pinnedMarkets-container">
                         {
-                            firstZip !== 0 &&
-                                <PinnedMarket key={firstZip.id} pm ={firstZip} pinView={pinView} setPinView={setPinView} />
+                            currentUser.userPinnedMarkets.map(pm => {
+                                return <PinnedMarket key={pm.id} pm={pm} pinView={pinView} setPinView={setPinView} />
+                            })
                         }
                     </div>
-                    <div className="dropbox"
-                         onDragOver={e => onDragOver(e)}
-                         onDrop = {e => onDrop(e, "chosenMarket2")}
-                    >
-                        Drag zip code here
-                        {
-                            secondZip !== 0 &&
-                                <PinnedMarket key={secondZip.id} pm ={secondZip} pinView={pinView} setPinView={setPinView} />
-                        }
+                    <div className="pinView-container">
+                        <PinView setPinView={setPinView} refresh={refreshUser} currentUser={currentUser} pinView={pinView} />
                     </div>
                 </div>
-                {/* <Input
-                    type="select"
-                    onChange={e => setFirstZip(e.target.value)}
-                >
-                    <option value="0">Select a zip code...</option>
-                    {
-                        currentUser.userPinnedMarkets.map(pm => {
-                            return <option value={pm.zipCode.zipCode}>{pm.zipCode.zipCode}</option>
-                        })
-                    }
-                </Input>
-                <Input
-                    type="select"
-                    onChange={e => setSecondZip(e.target.value)}
-                >
-                    <option value="0">Select a zip code...</option>
-                    {
-                        currentUser.userPinnedMarkets.map(pm => {
-                            return <option value={pm.zipCode.zipCode}>{pm.zipCode.zipCode}</option>
-                        })
-                    }
-                </Input> */}
-                <Button onClick={e => {
-                    e.preventDefault()
-                    routeToCompare()
+                <div className="compare-container">
+                    <h1 style={{color: "white"}}>Market Comparison</h1>
+                    <div className="dropboxes-container">
+                        <div className="dropbox" 
+                            onDragOver={e => onDragOver(e)}
+                            onDrop={e => onDrop(e, "chosenMarket1")}
+                        >
+                            <span className="drag-text">Drag zip code here</span>
+                            {
+                                firstZip !== 0 &&
+                                    <PinnedMarket key={firstZip.id} pm ={firstZip} pinView={pinView} setPinView={setPinView} />
+                            }
+                        </div>
+                            <Button className="compare-button" onClick={e => {
+                                e.preventDefault()
+                                routeToCompare()
 
-                }}>
-                    Compare
-                </Button>
+                            }}>
+                                Compare
+                            </Button>
+                        <div className="dropbox"
+                            onDragOver={e => onDragOver(e)}
+                            onDrop = {e => onDrop(e, "chosenMarket2")}
+                        >
+                            <span className="drag-text">Drag zip code here</span>
+                            {
+                                secondZip !== 0 &&
+                                    <PinnedMarket key={secondZip.id} pm ={secondZip} pinView={pinView} setPinView={setPinView} />
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     )

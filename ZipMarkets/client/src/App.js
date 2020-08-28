@@ -14,24 +14,24 @@ import MortgageRateProvider from './providers/MortgageRateProvider';
 
 function App() {
   return (
-    <Router>
-      <UserProvider>
-        <ZipProvider>
-          <PinnedMarketProvider>
-            <MessageProvider>
-              <HPiProvider>
-                <ZVHIProvider>
-                  <MortgageRateProvider>
-                    <Header />
-                    <ApplicationViews  />
-                  </MortgageRateProvider>
-                </ZVHIProvider>
-              </HPiProvider>
-            </MessageProvider>
-          </PinnedMarketProvider>
-        </ZipProvider>
-      </UserProvider>
-    </Router>
+      <Router>
+        <UserProvider>
+          <ZipProvider>
+            <PinnedMarketProvider>
+              <MessageProvider>
+                <HPiProvider>
+                  <ZVHIProvider>
+                    <MortgageRateProvider>
+                      <Header />
+                      <ApplicationViews  />
+                    </MortgageRateProvider>
+                  </ZVHIProvider>
+                </HPiProvider>
+              </MessageProvider>
+            </PinnedMarketProvider>
+          </ZipProvider>
+        </UserProvider>
+      </Router>
   );
 }
 

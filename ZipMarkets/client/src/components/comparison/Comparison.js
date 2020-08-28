@@ -16,7 +16,7 @@ export default function Comparison() {
     if(twoZips.length === 0) {
         return null
     }
-    debugger
+    
     return (
         <main className="maindetails-container">
             <div className="title-container">
@@ -25,7 +25,6 @@ export default function Comparison() {
             <div className="graphs-container">
                 <div className ="oneGraph">
                    <CompHPIGraph twoZips={twoZips} />
-                    
                 </div>
                 <div className="oneGraph">
                     <CompZHVIGraph twoZips={twoZips} />

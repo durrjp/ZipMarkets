@@ -21,7 +21,6 @@ export default function Register() {
 
   const registerClick = (e) => {
     e.preventDefault();
-    debugger
     if (password && password !== confirmPassword) {
       alert("Passwords don't match.");
     } else {

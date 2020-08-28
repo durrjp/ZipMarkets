@@ -64,7 +64,6 @@ export default function ZipDetails() {
     const handlePin = () => {
         
         if(isPinned) {
-            debugger
             const foundPM = currentUser.userPinnedMarkets.find(pm => pm.zipCodeId === oneZip.id)
             deletePinnedMarket(foundPM.id)
             setIsPinned(!isPinned)
