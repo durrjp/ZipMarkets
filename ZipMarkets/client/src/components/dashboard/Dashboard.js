@@ -26,7 +26,7 @@ export default function Dashboard() {
 
     const routeToCompare = () => {
         if(firstZip !== 0 && secondZip !== 0) {
-            history.push(`/comparison/${firstZip},${secondZip}`)
+            history.push(`/comparison/${firstZip.zipCode.zipCode},${secondZip.zipCode.zipCode}`)
         }
     }
 
@@ -36,9 +36,14 @@ export default function Dashboard() {
 
     const onDrop = (e, boxName) => {
         let transferZip = parseInt(e.dataTransfer.getData("zip"))
-        let chosenZip = currentUser.userPinnedMarkets.find(market => market.zipCode.zipCode === transferZip)
-        debugger
-        setFirstZip(chosenZip)
+        if(boxName === "chosenMarket1") {
+            let chosenZip = currentUser.userPinnedMarkets.find(market => market.zipCode.zipCode === transferZip)
+            setFirstZip(chosenZip)
+        }
+        else if (boxName === "chosenMarket2") {
+            let chosenZip = currentUser.userPinnedMarkets.find(market => market.zipCode.zipCode === transferZip)
+            setSecondZip(chosenZip)
+        }
     }
 
 
@@ -73,8 +78,15 @@ export default function Dashboard() {
                                 <PinnedMarket key={firstZip.id} pm ={firstZip} pinView={pinView} setPinView={setPinView} />
                         }
                     </div>
-                    <div className="dropbox">
+                    <div className="dropbox"
+                         onDragOver={e => onDragOver(e)}
+                         onDrop = {e => onDrop(e, "chosenMarket2")}
+                    >
                         Drag zip code here
+                        {
+                            secondZip !== 0 &&
+                                <PinnedMarket key={secondZip.id} pm ={secondZip} pinView={pinView} setPinView={setPinView} />
+                        }
                     </div>
                 </div>
                 {/* <Input
