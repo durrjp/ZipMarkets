@@ -148,7 +148,7 @@ export default function ZVHIGraph({twoZips}) {
 
     return (
         <>
-        <h3 style={{textAlign: "center", marginBottom: "1em"}}>Median Home Price (Zillow)</h3>
+        <h3 style={{textAlign: "center", marginBottom: "1em"}}>Median Home Price Comparison</h3>
         <Line 
             data={data}
             options={{

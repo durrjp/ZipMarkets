@@ -144,7 +144,7 @@ export default function CompHPIGraph({twoZips}) {
 
     return (
         <>
-        <h3 style={{textAlign: "center", marginBottom: "1em"}}>Home Price Index (FHFA)</h3>
+        <h3 style={{textAlign: "center", marginBottom: "1em"}}>Home Price Index Comparison</h3>
         <Line
             data={data}
             options={{

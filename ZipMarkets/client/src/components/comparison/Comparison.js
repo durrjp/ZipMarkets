@@ -1,12 +1,9 @@
 import React, { useContext, useEffect } from "react"
 import { ZipContext } from "../../providers/ZipProvider"
-import HPIGraph from "../zipDetails/HPIGraph"
-import ZVHIGraph from "../zipDetails/ZVHIGraph"
-import MortgageRateGraph from "../zipDetails/MortgageRateGraph"
-import COLTable from "../zipDetails/COLTable"
 import { useParams } from "react-router-dom"
 import CompHPIGraph from "./CompHPIGraph"
 import CompZHVIGraph from "./CompZHVIGraph"
+import CompCOLTable from "./CompCOLTable"
 
 export default function Comparison() {
     const {twoZips, getTwoZips} = useContext(ZipContext)
@@ -35,7 +32,7 @@ export default function Comparison() {
                 </div>
             </div>
             <div className="COL-container">
-                {/* <COLTable twoZips={twoZips} /> */}
+                <CompCOLTable twoZips={twoZips} />
             </div>
         </main>
     )
