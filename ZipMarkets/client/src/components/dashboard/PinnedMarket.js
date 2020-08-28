@@ -13,8 +13,14 @@ export default function PinnedMarket({pm, setPinView, pinView}) {
             return "pm-btn"
         }
     }
+    const onDragStart = (e, zip) => {
+        e.dataTransfer.setData("zip", zip)
+    }
     return (
-        <div className="pm-container">
+        <div className="pm-container"
+             draggable
+             onDragStart = {(e) => onDragStart(e, pm.zipCode.zipCode)}
+        >
             <Button className={isSelected()} onClick={(e) => {
                 e.preventDefault()
                 setPinView(pm)}}>

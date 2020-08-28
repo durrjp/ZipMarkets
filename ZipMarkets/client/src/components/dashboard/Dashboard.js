@@ -30,9 +30,19 @@ export default function Dashboard() {
         }
     }
 
+    const onDragOver = (e) => {
+        e.preventDefault()
+    }
+
+    const onDrop = (e, boxName) => {
+        let transferZip = parseInt(e.dataTransfer.getData("zip"))
+        let chosenZip = currentUser.userPinnedMarkets.find(market => market.zipCode.zipCode === transferZip)
+        debugger
+        setFirstZip(chosenZip)
+    }
+
 
     
-
     return (
         <main className="dashboard-container">
             <div className="title-container" style={{marginTop: "1em", marginBottom: "2em"}}>
@@ -52,7 +62,22 @@ export default function Dashboard() {
             </div>
             <div>
                 <h1>Compare</h1>
-                <Input
+                <div className="dropboxes-container">
+                    <div className="dropbox" 
+                         onDragOver={e => onDragOver(e)}
+                         onDrop={e => onDrop(e, "chosenMarket1")}
+                    >
+                        Drag zip code here
+                        {
+                            firstZip !== 0 &&
+                                <PinnedMarket key={firstZip.id} pm ={firstZip} pinView={pinView} setPinView={setPinView} />
+                        }
+                    </div>
+                    <div className="dropbox">
+                        Drag zip code here
+                    </div>
+                </div>
+                {/* <Input
                     type="select"
                     onChange={e => setFirstZip(e.target.value)}
                 >
@@ -73,7 +98,7 @@ export default function Dashboard() {
                             return <option value={pm.zipCode.zipCode}>{pm.zipCode.zipCode}</option>
                         })
                     }
-                </Input>
+                </Input> */}
                 <Button onClick={e => {
                     e.preventDefault()
                     routeToCompare()
