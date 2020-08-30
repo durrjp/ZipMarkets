@@ -139,7 +139,7 @@ export default function Dashboard() {
                             }
                             <Button className={clearBtn2()} onClick={e => {
                                 e.preventDefault()
-                                setFirstZip(0)}
+                                setSecondZip(0)}
                             }
                             >
                                 Clear selection
