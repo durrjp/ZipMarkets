@@ -46,6 +46,38 @@ export default function Dashboard() {
         }
     }
 
+    const dragText1 = () => {
+        if(firstZip ===0) {
+            return "drag-text"
+        } else {
+            return "none"
+        }
+    }
+
+    const dragtext2 = () => {
+        if(secondZip ===0) {
+            return "drag-text"
+        } else {
+            return "none"
+        }
+    }
+
+    const clearBtn1 = () => {
+        if(firstZip === 0) {
+            return "none"
+        } else {
+            return "clearSelection-btn"
+        }
+    }
+
+    const clearBtn2 = () => {
+        if(secondZip === 0) {
+            return "none"
+        } else {
+            return "clearSelection-btn"
+        }
+    }
+
 
     
     return (
@@ -53,7 +85,7 @@ export default function Dashboard() {
             <div className="title-container" style={{marginTop: "1em", marginBottom: "2em"}}>
                 <h1>Dashboard</h1>
             </div>
-            <div className="bodycontainer">
+            <div className="body-container">
                 <div className="secondmain-container">
                     <div style={{textAlign: "center"}}>
                         <h1 style={{color: "white"}}>Pinned Markets</h1>
@@ -76,11 +108,18 @@ export default function Dashboard() {
                             onDragOver={e => onDragOver(e)}
                             onDrop={e => onDrop(e, "chosenMarket1")}
                         >
-                            <span className="drag-text">Drag zip code here</span>
+                            <h4 className={dragText1()}>Drag zip code here</h4>
                             {
                                 firstZip !== 0 &&
                                     <PinnedMarket key={firstZip.id} pm ={firstZip} pinView={pinView} setPinView={setPinView} />
                             }
+                            <Button className={clearBtn1()} onClick={e => {
+                                e.preventDefault()
+                                setFirstZip(0)}
+                            }
+                            >
+                                Clear selection
+                            </Button>
                         </div>
                             <Button className="compare-button" onClick={e => {
                                 e.preventDefault()
@@ -93,11 +132,18 @@ export default function Dashboard() {
                             onDragOver={e => onDragOver(e)}
                             onDrop = {e => onDrop(e, "chosenMarket2")}
                         >
-                            <span className="drag-text">Drag zip code here</span>
+                            <h4 className={dragtext2()}>Drag zip code here</h4>
                             {
                                 secondZip !== 0 &&
                                     <PinnedMarket key={secondZip.id} pm ={secondZip} pinView={pinView} setPinView={setPinView} />
                             }
+                            <Button className={clearBtn2()} onClick={e => {
+                                e.preventDefault()
+                                setFirstZip(0)}
+                            }
+                            >
+                                Clear selection
+                            </Button>
                         </div>
                     </div>
                 </div>
