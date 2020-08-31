@@ -40,8 +40,30 @@
 .pinnedMarkets-container {
     display: flex;
     flex-flow: row wrap;
+    height: 230px;
     width: 100%;
     justify-content: center;
+    overflow-y: scroll;
+}
+
+#scroll-style::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#scroll-style::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: none;
+}
+
+#scroll-style::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #3B5FB5;
 }
 
 
@@ -119,7 +141,7 @@
 
 .dropbox {
     width: 250px;
-    height: 250px;
+    height: 200px;
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25) !important;
     background-color: #E6E8F9 !important;
     border-radius: 5px;
@@ -130,17 +152,28 @@
     width: 100px !important;
     margin-top: 1em;
     margin-bottom: 1em;
-    background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+    background:linear-gradient(to bottom, #acaaaa 5%, #7c7a7a 100%);
+	background-color:#8a8787;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: black !important;
+    border: none !important
+}
+
+.compare-button-ready {
+    width: 100px !important;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background:linear-gradient(to bottom, #82e98a 5%, #65b46b 100%);
 	background-color:#ededed;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     color: black !important;
     border: none !important
 }
 
-.compare-button:hover {
-    background:linear-gradient(to bottom, #b6b5b5 5%, #ededed 100%);
-    background-color:#dfdfdf;
+.compare-button-ready:hover {
+    background:linear-gradient(to bottom, #6abd71 10%, #49814d 100%);
 }
+
 
 .none {
     visibility: hidden;
@@ -156,7 +189,7 @@
     background-color:#f24537;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border: none !important;
-    margin-top: 5em;
+    margin-top: 2em;
 }
 
 .clearSelection-btn:hover {
@@ -167,6 +200,6 @@
 }
 
 .drag-text {
-    margin-top: 4.2em
+    margin-top: 3.2em
 }
 

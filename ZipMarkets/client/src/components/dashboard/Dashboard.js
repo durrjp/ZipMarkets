@@ -27,6 +27,8 @@ export default function Dashboard() {
     const routeToCompare = () => {
         if(firstZip !== 0 && secondZip !== 0) {
             history.push(`/comparison/${firstZip.zipCode.zipCode},${secondZip.zipCode.zipCode}`)
+        } else {
+            alert("Please select two zip codes to compare...")
         }
     }
 
@@ -78,19 +80,27 @@ export default function Dashboard() {
         }
     }
 
+    const compareButton = () => {
+        if(firstZip !== 0 && secondZip !== 0) {
+            return "compare-button-ready"
+        } else {
+            return "compare-button"
+        }
+    }
+
 
     
     return (
         <main className="dashboard-container">
             <div className="title-container" style={{marginTop: "1em", marginBottom: "2em"}}>
-                <h1>Dashboard</h1>
+                <h1>Dashboard - <span style={{color: "#3B5FB5", fontWeight: "bold"}}>{currentUser.displayName}</span></h1>
             </div>
             <div className="body-container">
                 <div className="secondmain-container">
                     <div style={{textAlign: "center"}}>
                         <h1 style={{color: "white"}}>Pinned Markets</h1>
                     </div>
-                    <div className="pinnedMarkets-container">
+                    <div className="pinnedMarkets-container" id="scroll-style">
                         {
                             currentUser.userPinnedMarkets.map(pm => {
                                 return <PinnedMarket key={pm.id} pm={pm} pinView={pinView} setPinView={setPinView} />
@@ -121,7 +131,7 @@ export default function Dashboard() {
                                 Clear selection
                             </Button>
                         </div>
-                            <Button className="compare-button" onClick={e => {
+                            <Button className={compareButton()} onClick={e => {
                                 e.preventDefault()
                                 routeToCompare()
 

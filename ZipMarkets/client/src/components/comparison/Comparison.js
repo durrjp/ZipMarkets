@@ -20,7 +20,7 @@ export default function Comparison() {
     return (
         <main className="maindetails-container">
             <div className="title-container">
-                <h1><span style={{color: "#3B5FB5", fontWeight: "bold"}}>{twoZips[0].zipCode}</span> vs {twoZips[1].zipCode}</h1>
+                <h1><span style={{color: "rgba(255,160,0,1)", fontWeight: "bold"}}>{twoZips[0].zipCode}</span> vs <span style={{color: "#3B5FB5", fontWeight: "bold"}}>{twoZips[1].zipCode}</span></h1>
             </div>
             <div className="graphs-container">
                 <div className ="oneGraph">
