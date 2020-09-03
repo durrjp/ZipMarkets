@@ -3,4 +3,5 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 COPY . .
+ENV ConnectionString
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet ZipMarkets.dll
